@@ -1,443 +1,622 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stellaris - Guide de démarrage</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .step {
-            margin-bottom: 40px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
-        }
-        
-        .step-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: #667eea;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            font-weight: bold;
-            font-size: 1.3em;
-            margin-right: 15px;
-        }
-        
-        .step h2 {
-            display: inline-block;
-            color: #667eea;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        
-        .step-content {
-            margin-left: 55px;
-            margin-top: 15px;
-        }
-        
-        .important {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-        
-        .success {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-        
-        .code {
-            background: #282c34;
-            color: #61dafb;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 10px 0;
-            overflow-x: auto;
-        }
-        
-        .button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 10px 5px;
-            transition: transform 0.2s;
-        }
-        
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .button-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-        
-        ol, ul {
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-        
-        li {
-            margin: 8px 0;
-        }
-        
-        .screenshot {
-            max-width: 100%;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        
-        .footer {
-            background: #282c34;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .help-box {
-            background: #e7f3ff;
-            border-left: 5px solid #2196F3;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-        
-        .file-icon {
-            display: inline-block;
-            padding: 5px 12px;
-            background: #667eea;
-            color: white;
-            border-radius: 5px;
-            font-weight: bold;
-            font-family: monospace;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.95;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .step {
+        margin-bottom: 40px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        border-left: 5px solid #667eea;
+      }
+
+      .step-number {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: #667eea;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        font-size: 1.3em;
+        margin-right: 15px;
+      }
+
+      .step h2 {
+        display: inline-block;
+        color: #667eea;
+        font-size: 1.5em;
+        margin-bottom: 15px;
+      }
+
+      .step-content {
+        margin-left: 55px;
+        margin-top: 15px;
+      }
+
+      .important {
+        background: #fff3cd;
+        border-left: 5px solid #ffc107;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      .success {
+        background: #d4edda;
+        border-left: 5px solid #28a745;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      .code {
+        background: #282c34;
+        color: #61dafb;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        margin: 10px 0;
+        overflow-x: auto;
+      }
+
+      .button {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 10px 5px;
+        transition: transform 0.2s;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .button-secondary {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      }
+
+      ol,
+      ul {
+        margin-left: 20px;
+        margin-top: 10px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .screenshot {
+        max-width: 100%;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin: 15px 0;
+      }
+
+      .footer {
+        background: #282c34;
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .help-box {
+        background: #e7f3ff;
+        border-left: 5px solid #2196f3;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      .file-icon {
+        display: inline-block;
+        padding: 5px 12px;
+        background: #667eea;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        font-family: monospace;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>🚀 Stellaris</h1>
-            <p>Guide de démarrage en 3 étapes simples</p>
+      <div class="header">
+        <h1>🚀 Stellaris</h1>
+        <p>Guide de démarrage en 3 étapes simples</p>
+      </div>
+
+      <div class="content">
+        <div class="important">
+          <strong>👋 Bienvenue !</strong><br />
+          Ce guide va vous aider à télécharger et lancer votre site Stellaris
+          sur votre ordinateur Windows.<br />
+          Pas de panique : tout est expliqué simplement, étape par étape !
         </div>
-        
-        <div class="content">
+
+        <!-- ÉTAPE 0 : TÉLÉCHARGEMENT -->
+        <div class="step" style="border-left-color: #2196f3">
+          <span class="step-number" style="background: #2196f3">0</span>
+          <h2 style="color: #2196f3">Télécharger le projet depuis GitHub</h2>
+          <div class="step-content">
+            <p><strong>Vous n'avez pas encore le projet ?</strong></p>
+            <p>
+              Pas de problème ! On va le télécharger ensemble en quelques clics.
+            </p>
+
+            <div class="help-box">
+              <strong>📥 Méthode simple (recommandée) :</strong>
+              <ol>
+                <li>
+                  Allez sur la page GitHub du projet (l'adresse vous a été
+                  communiquée)
+                </li>
+                <li>
+                  Cherchez le bouton vert <strong>"Code"</strong> (en haut à
+                  droite de la page)
+                </li>
+                <li>Cliquez sur ce bouton vert <strong>"Code"</strong></li>
+                <li>
+                  Dans le menu qui s'ouvre, cliquez sur
+                  <strong>"Download ZIP"</strong>
+                </li>
+                <li>Un fichier va se télécharger (environ 1-5 MB)</li>
+              </ol>
+            </div>
+
             <div class="important">
-                <strong>👋 Bienvenue !</strong><br>
-                Ce guide va vous aider à télécharger et lancer votre site Stellaris sur votre ordinateur Windows.<br>
-                Pas de panique : tout est expliqué simplement, étape par étape !
+              <strong>📂 Extraire le fichier ZIP :</strong>
+              <ol style="margin-top: 10px">
+                <li>
+                  Trouvez le fichier téléchargé (souvent dans
+                  <strong>"Téléchargements"</strong>)
+                </li>
+                <li>
+                  Le fichier s'appelle généralement
+                  <code
+                    style="
+                      background: #f0f0f0;
+                      padding: 3px 8px;
+                      border-radius: 4px;
+                    "
+                    >Stellaris-main.zip</code
+                  >
+                </li>
+                <li>
+                  Faites un <strong>CLIC DROIT</strong> sur le fichier ZIP
+                </li>
+                <li>
+                  Choisissez <strong>"Extraire tout..."</strong> ou
+                  <strong>"Extraire ici"</strong>
+                </li>
+                <li>
+                  Windows va créer un nouveau dossier
+                  <strong>"Stellaris"</strong>
+                </li>
+                <li>
+                  Vous pouvez déplacer ce dossier où vous voulez :
+                  <ul style="margin-top: 5px">
+                    <li>Sur le Bureau</li>
+                    <li>Dans Documents</li>
+                    <li>Dans Mes Documents</li>
+                    <li>N'importe où sur votre disque dur</li>
+                  </ul>
+                </li>
+              </ol>
             </div>
-            
-            <!-- ÉTAPE 0 : TÉLÉCHARGEMENT -->
-            <div class="step" style="border-left-color: #2196F3;">
-                <span class="step-number" style="background: #2196F3;">0</span>
-                <h2 style="color: #2196F3;">Télécharger le projet depuis GitHub</h2>
-                <div class="step-content">
-                    <p><strong>Vous n'avez pas encore le projet ?</strong></p>
-                    <p>Pas de problème ! On va le télécharger ensemble en quelques clics.</p>
-                    
-                    <div class="help-box">
-                        <strong>📥 Méthode simple (recommandée) :</strong>
-                        <ol>
-                            <li>Allez sur la page GitHub du projet (l'adresse vous a été communiquée)</li>
-                            <li>Cherchez le bouton vert <strong>"Code"</strong> (en haut à droite de la page)</li>
-                            <li>Cliquez sur ce bouton vert <strong>"Code"</strong></li>
-                            <li>Dans le menu qui s'ouvre, cliquez sur <strong>"Download ZIP"</strong></li>
-                            <li>Un fichier va se télécharger (environ 1-5 MB)</li>
-                        </ol>
-                    </div>
-                    
-                    <div class="important">
-                        <strong>📂 Extraire le fichier ZIP :</strong>
-                        <ol style="margin-top: 10px;">
-                            <li>Trouvez le fichier téléchargé (souvent dans <strong>"Téléchargements"</strong>)</li>
-                            <li>Le fichier s'appelle généralement <code style="background: #f0f0f0; padding: 3px 8px; border-radius: 4px;">Stellaris-main.zip</code></li>
-                            <li>Faites un <strong>CLIC DROIT</strong> sur le fichier ZIP</li>
-                            <li>Choisissez <strong>"Extraire tout..."</strong> ou <strong>"Extraire ici"</strong></li>
-                            <li>Windows va créer un nouveau dossier <strong>"Stellaris"</strong></li>
-                            <li>Vous pouvez déplacer ce dossier où vous voulez :
-                                <ul style="margin-top: 5px;">
-                                    <li>Sur le Bureau</li>
-                                    <li>Dans Documents</li>
-                                    <li>Dans Mes Documents</li>
-                                    <li>N'importe où sur votre disque dur</li>
-                                </ul>
-                            </li>
-                        </ol>
-                    </div>
-                    
-                    <div class="success">
-                        <strong>✅ Parfait !</strong> Vous avez maintenant le projet sur votre ordinateur.<br>
-                        Ouvrez le dossier <strong>Stellaris</strong> et passez à l'étape suivante !
-                    </div>
-                    
-                    <div class="help-box" style="margin-top: 20px;">
-                        <strong>💡 Astuce pour utilisateurs avancés (Git) :</strong>
-                        <p style="margin-top: 10px;">Si vous connaissez Git, vous pouvez aussi cloner le projet :</p>
-                        <div class="code">git clone [adresse-du-repo-github]</div>
-                    </div>
-                </div>
+
+            <div class="success">
+              <strong>✅ Parfait !</strong> Vous avez maintenant le projet sur
+              votre ordinateur.<br />
+              Ouvrez le dossier <strong>Stellaris</strong> et passez à l'étape
+              suivante !
             </div>
-            
-            <!-- ÉTAPE 1 -->
-            <div class="step">
-                <span class="step-number">1</span>
-                <h2>Installer Node.js</h2>
-                <div class="step-content">
-                    <p><strong>Node.js, c'est quoi ?</strong></p>
-                    <p>C'est un programme gratuit qui permet de faire fonctionner votre site sur votre ordinateur. Il faut l'installer une seule fois.</p>
-                    
-                    <div class="help-box">
-                        <strong>📥 Comment installer Node.js :</strong>
-                        <ol>
-                            <li>Allez sur ce site : <a href="https://nodejs.org" target="_blank" style="color: #2196F3; font-weight: bold;">https://nodejs.org</a></li>
-                            <li>Cliquez sur le gros bouton vert <strong>"LTS"</strong> (version recommandée)</li>
-                            <li>Un fichier va se télécharger (environ 30 MB)</li>
-                            <li>Double-cliquez sur le fichier téléchargé</li>
-                            <li>Cliquez sur <strong>"Next"</strong> (Suivant) à chaque étape</li>
-                            <li>Laissez toutes les options par défaut</li>
-                            <li>Cliquez sur <strong>"Install"</strong> puis attendez</li>
-                            <li>Cliquez sur <strong>"Finish"</strong> quand c'est terminé</li>
-                        </ol>
-                    </div>
-                    
-                    <div class="important">
-                        <strong>⚠️ Important :</strong> Une fois l'installation terminée, <strong>redémarrez votre ordinateur</strong> pour que Node.js fonctionne correctement.
-                    </div>
-                    
-                    <p><strong>Comment vérifier que Node.js est bien installé ?</strong></p>
-                    <ol>
-                        <li>Appuyez sur les touches <strong>Windows + R</strong> de votre clavier</li>
-                        <li>Tapez <code style="background: #f0f0f0; padding: 3px 8px; border-radius: 4px;">cmd</code> et appuyez sur Entrée</li>
-                        <li>Une fenêtre noire s'ouvre. Tapez : <div class="code">node --version</div></li>
-                        <li>Si vous voyez quelque chose comme <code style="background: #f0f0f0; padding: 3px 8px; border-radius: 4px;">v20.x.x</code>, c'est bon ! ✅</li>
-                    </ol>
-                </div>
+
+            <div class="help-box" style="margin-top: 20px">
+              <strong>💡 Astuce pour utilisateurs avancés (Git) :</strong>
+              <p style="margin-top: 10px">
+                Si vous connaissez Git, vous pouvez aussi cloner le projet :
+              </p>
+              <div class="code">git clone [adresse-du-repo-github]</div>
             </div>
-            
-            <!-- ÉTAPE 2 -->
-            <div class="step">
-                <span class="step-number">2</span>
-                <h2>Préparer le projet</h2>
-                <div class="step-content">
-                    <p>Votre dossier Stellaris contient tout ce qu'il faut. On va juste créer un fichier de configuration automatiquement.</p>
-                    
-                    <div class="help-box">
-                        <strong>📂 Voici ce que vous devez faire :</strong>
-                        <ol>
-                            <li>Ouvrez le dossier <strong>Stellaris</strong> sur votre ordinateur</li>
-                            <li>Cherchez le fichier <span class="file-icon">setup-env.bat</span></li>
-                            <li><strong>Double-cliquez</strong> sur ce fichier</li>
-                            <li>Une fenêtre noire s'ouvre et crée automatiquement votre configuration</li>
-                            <li>Appuyez sur une touche pour fermer la fenêtre</li>
-                        </ol>
-                    </div>
-                    
-                    <div class="success">
-                        <strong>✅ C'est fait !</strong> Un fichier caché <code>.env</code> a été créé avec tous les réglages par défaut.
-                    </div>
-                    
-                    <div class="important">
-                        <strong>🔐 Informations importantes :</strong><br>
-                        • <strong>Clé admin :</strong> <code style="background: #f0f0f0; padding: 3px 8px; border-radius: 4px;">stellaris2025</code> (pour accéder à l'interface admin)<br>
-                        • <strong>Port :</strong> 3000 (c'est l'adresse du site sur votre PC)<br>
-                        • <strong>Email :</strong> Non configuré (facultatif, pour tester sans email)
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ÉTAPE 3 -->
-            <div class="step">
-                <span class="step-number">3</span>
-                <h2>Lancer le site</h2>
-                <div class="step-content">
-                    <p>C'est la dernière étape, la plus simple ! 🎉</p>
-                    
-                    <div class="help-box">
-                        <strong>🚀 Pour démarrer votre site :</strong>
-                        <ol>
-                            <li>Dans le dossier Stellaris, cherchez le fichier <span class="file-icon">START.bat</span></li>
-                            <li><strong>Double-cliquez</strong> dessus</li>
-                            <li>Une fenêtre noire s'ouvre (gardez-la ouverte !)</li>
-                            <li>Le site va s'ouvrir automatiquement dans votre navigateur</li>
-                            <li>Si ça ne s'ouvre pas tout seul, allez sur : <a href="http://localhost:3000" target="_blank" style="color: #2196F3; font-weight: bold;">http://localhost:3000</a></li>
-                        </ol>
-                    </div>
-                    
-                    <div class="success">
-                        <strong>🎊 Félicitations !</strong> Votre site Stellaris est maintenant accessible !
-                        <ul style="margin-top: 10px;">
-                            <li><strong>Site public :</strong> <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></li>
-                            <li><strong>Interface admin :</strong> <a href="http://localhost:3000/admin" target="_blank">http://localhost:3000/admin</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="important">
-                        <strong>⚠️ TRÈS IMPORTANT :</strong><br>
-                        • <strong>Ne fermez PAS la fenêtre noire</strong> tant que vous utilisez le site<br>
-                        • Cette fenêtre fait fonctionner votre site<br>
-                        • Pour <strong>arrêter le site</strong> : fermez simplement cette fenêtre noire<br>
-                        • Pour <strong>relancer le site</strong> plus tard : double-cliquez à nouveau sur START.bat
-                    </div>
-                </div>
-            </div>
-            
-            <!-- UTILISATION -->
-            <div class="step" style="border-left-color: #28a745;">
-                <span class="step-number" style="background: #28a745;">✓</span>
-                <h2 style="color: #28a745;">Utilisation quotidienne</h2>
-                <div class="step-content">
-                    <p><strong>Tous les jours, pour utiliser votre site :</strong></p>
-                    <ol>
-                        <li>Ouvrez le dossier Stellaris</li>
-                        <li>Double-cliquez sur <span class="file-icon">START.bat</span></li>
-                        <li>Attendez que le navigateur s'ouvre</li>
-                        <li>C'est tout ! 😊</li>
-                    </ol>
-                    
-                    <p style="margin-top: 20px;"><strong>La première fois uniquement :</strong></p>
-                    <ul>
-                        <li>Le site va télécharger des composants (1-2 minutes)</li>
-                        <li>C'est normal, soyez patient</li>
-                        <li>Les fois suivantes, ça démarre en 5 secondes !</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- ACCÈS ADMIN -->
-            <div class="step" style="border-left-color: #ff6b6b;">
-                <span class="step-number" style="background: #ff6b6b;">👤</span>
-                <h2 style="color: #ff6b6b;">Interface administrateur</h2>
-                <div class="step-content">
-                    <p>Pour gérer les rendez-vous et créneaux :</p>
-                    <ol>
-                        <li>Allez sur : <a href="http://localhost:3000/admin" target="_blank" style="color: #ff6b6b; font-weight: bold;">http://localhost:3000/admin</a></li>
-                        <li>Quand on vous demande la clé, entrez : <code style="background: #ffe6e6; padding: 5px 12px; border-radius: 4px; color: #ff6b6b; font-weight: bold;">stellaris2025</code></li>
-                        <li>Vous pouvez maintenant créer des créneaux et gérer les demandes</li>
-                    </ol>
-                    
-                    <div class="help-box">
-                        <strong>💡 Conseil :</strong> Vous pouvez changer cette clé dans le fichier <code>.env</code> si vous voulez plus de sécurité.
-                    </div>
-                </div>
-            </div>
-            
-            <!-- AIDE -->
-            <div class="step" style="border-left-color: #ffc107;">
-                <span class="step-number" style="background: #ffc107;">?</span>
-                <h2 style="color: #ffc107;">Problèmes courants</h2>
-                <div class="step-content">
-                    <p><strong>❌ "Node.js n'est pas installé"</strong></p>
-                    <ul>
-                        <li>Vérifiez que vous avez bien installé Node.js (Étape 1)</li>
-                        <li>Redémarrez votre ordinateur après l'installation</li>
-                    </ul>
-                    
-                    <p style="margin-top: 15px;"><strong>❌ "Le port 3000 est déjà utilisé"</strong></p>
-                    <ul>
-                        <li>Fermez toutes les fenêtres noires ouvertes</li>
-                        <li>Relancez START.bat</li>
-                    </ul>
-                    
-                    <p style="margin-top: 15px;"><strong>❌ "La page ne s'affiche pas"</strong></p>
-                    <ul>
-                        <li>Vérifiez que la fenêtre noire est toujours ouverte</li>
-                        <li>Essayez de taper manuellement : <code>http://localhost:3000</code></li>
-                        <li>Vérifiez votre pare-feu Windows</li>
-                    </ul>
-                    
-                    <p style="margin-top: 15px;"><strong>❌ "Erreur lors de l'installation"</strong></p>
-                    <ul>
-                        <li>Vérifiez votre connexion internet</li>
-                        <li>Désactivez temporairement votre antivirus</li>
-                        <li>Relancez START.bat</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- RACCOURCIS -->
-            <div style="text-align: center; margin: 40px 0;">
-                <h2 style="color: #667eea; margin-bottom: 20px;">🔗 Accès rapides</h2>
-                <a href="http://localhost:3000" target="_blank" class="button">
-                    🏠 Ouvrir le site
-                </a>
-                <a href="http://localhost:3000/admin" target="_blank" class="button button-secondary">
-                    ⚙️ Interface admin
-                </a>
-            </div>
+          </div>
         </div>
-        
-        <div class="footer">
-            <h3>📚 Résumé ultra-rapide</h3>
-            <p style="margin-top: 15px; font-size: 1.1em;">
-                0️⃣ Télécharger et extraire le ZIP depuis GitHub<br>
-                1️⃣ Installer Node.js (une fois)<br>
-                2️⃣ Double-clic sur <strong>setup-env.bat</strong> (une fois)<br>
-                3️⃣ Double-clic sur <strong>START.bat</strong> (à chaque utilisation)
+
+        <!-- ÉTAPE 1 -->
+        <div class="step">
+          <span class="step-number">1</span>
+          <h2>Installer Node.js</h2>
+          <div class="step-content">
+            <p><strong>Node.js, c'est quoi ?</strong></p>
+            <p>
+              C'est un programme gratuit qui permet de faire fonctionner votre
+              site sur votre ordinateur. Il faut l'installer une seule fois.
             </p>
-            <p style="margin-top: 20px; opacity: 0.8;">
-                Stellaris - Guide de démarrage pour Windows
+
+            <div class="help-box">
+              <strong>📥 Comment installer Node.js :</strong>
+              <ol>
+                <li>
+                  Allez sur ce site :
+                  <a
+                    href="https://nodejs.org"
+                    target="_blank"
+                    style="color: #2196f3; font-weight: bold"
+                    >https://nodejs.org</a
+                  >
+                </li>
+                <li>
+                  Cliquez sur le gros bouton vert
+                  <strong>"LTS"</strong> (version recommandée)
+                </li>
+                <li>Un fichier va se télécharger (environ 30 MB)</li>
+                <li>Double-cliquez sur le fichier téléchargé</li>
+                <li>
+                  Cliquez sur <strong>"Next"</strong> (Suivant) à chaque étape
+                </li>
+                <li>Laissez toutes les options par défaut</li>
+                <li>Cliquez sur <strong>"Install"</strong> puis attendez</li>
+                <li>
+                  Cliquez sur <strong>"Finish"</strong> quand c'est terminé
+                </li>
+              </ol>
+            </div>
+
+            <div class="important">
+              <strong>⚠️ Important :</strong> Une fois l'installation terminée,
+              <strong>redémarrez votre ordinateur</strong> pour que Node.js
+              fonctionne correctement.
+            </div>
+
+            <p>
+              <strong>Comment vérifier que Node.js est bien installé ?</strong>
             </p>
+            <ol>
+              <li>
+                Appuyez sur les touches <strong>Windows + R</strong> de votre
+                clavier
+              </li>
+              <li>
+                Tapez
+                <code
+                  style="
+                    background: #f0f0f0;
+                    padding: 3px 8px;
+                    border-radius: 4px;
+                  "
+                  >cmd</code
+                >
+                et appuyez sur Entrée
+              </li>
+              <li>
+                Une fenêtre noire s'ouvre. Tapez :
+                <div class="code">node --version</div>
+              </li>
+              <li>
+                Si vous voyez quelque chose comme
+                <code
+                  style="
+                    background: #f0f0f0;
+                    padding: 3px 8px;
+                    border-radius: 4px;
+                  "
+                  >v20.x.x</code
+                >, c'est bon ! ✅
+              </li>
+            </ol>
+          </div>
         </div>
+
+        <!-- ÉTAPE 2 -->
+        <div class="step">
+          <span class="step-number">2</span>
+          <h2>Préparer le projet</h2>
+          <div class="step-content">
+            <p>
+              Votre dossier Stellaris contient tout ce qu'il faut. On va juste
+              créer un fichier de configuration automatiquement.
+            </p>
+
+            <div class="help-box">
+              <strong>📂 Voici ce que vous devez faire :</strong>
+              <ol>
+                <li>
+                  Ouvrez le dossier <strong>Stellaris</strong> sur votre
+                  ordinateur
+                </li>
+                <li>
+                  Cherchez le fichier
+                  <span class="file-icon">setup-env.bat</span>
+                </li>
+                <li><strong>Double-cliquez</strong> sur ce fichier</li>
+                <li>
+                  Une fenêtre noire s'ouvre et crée automatiquement votre
+                  configuration
+                </li>
+                <li>Appuyez sur une touche pour fermer la fenêtre</li>
+              </ol>
+            </div>
+
+            <div class="success">
+              <strong>✅ C'est fait !</strong> Un fichier caché
+              <code>.env</code> a été créé avec tous les réglages par défaut.
+            </div>
+
+            <div class="important">
+              <strong>🔐 Informations importantes :</strong><br />
+              • <strong>Clé admin :</strong>
+              <code
+                style="
+                  background: #f0f0f0;
+                  padding: 3px 8px;
+                  border-radius: 4px;
+                "
+                >stellaris2025</code
+              >
+              (pour accéder à l'interface admin)<br />
+              • <strong>Port :</strong> 3000 (c'est l'adresse du site sur votre
+              PC)<br />
+              • <strong>Email :</strong> Non configuré (facultatif, pour tester
+              sans email)
+            </div>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 3 -->
+        <div class="step">
+          <span class="step-number">3</span>
+          <h2>Lancer le site</h2>
+          <div class="step-content">
+            <p>C'est la dernière étape, la plus simple ! 🎉</p>
+
+            <div class="help-box">
+              <strong>🚀 Pour démarrer votre site :</strong>
+              <ol>
+                <li>
+                  Dans le dossier Stellaris, cherchez le fichier
+                  <span class="file-icon">START.bat</span>
+                </li>
+                <li><strong>Double-cliquez</strong> dessus</li>
+                <li>Une fenêtre noire s'ouvre (gardez-la ouverte !)</li>
+                <li>
+                  Le site va s'ouvrir automatiquement dans votre navigateur
+                </li>
+                <li>
+                  Si ça ne s'ouvre pas tout seul, allez sur :
+                  <a
+                    href="http://localhost:3000"
+                    target="_blank"
+                    style="color: #2196f3; font-weight: bold"
+                    >http://localhost:3000</a
+                  >
+                </li>
+              </ol>
+            </div>
+
+            <div class="success">
+              <strong>🎊 Félicitations !</strong> Votre site Stellaris est
+              maintenant accessible !
+              <ul style="margin-top: 10px">
+                <li>
+                  <strong>Site public :</strong>
+                  <a href="http://localhost:3000" target="_blank"
+                    >http://localhost:3000</a
+                  >
+                </li>
+                <li>
+                  <strong>Interface admin :</strong>
+                  <a href="http://localhost:3000/admin" target="_blank"
+                    >http://localhost:3000/admin</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="important">
+              <strong>⚠️ TRÈS IMPORTANT :</strong><br />
+              • <strong>Ne fermez PAS la fenêtre noire</strong> tant que vous
+              utilisez le site<br />
+              • Cette fenêtre fait fonctionner votre site<br />
+              • Pour <strong>arrêter le site</strong> : fermez simplement cette
+              fenêtre noire<br />
+              • Pour <strong>relancer le site</strong> plus tard :
+              double-cliquez à nouveau sur START.bat
+            </div>
+          </div>
+        </div>
+
+        <!-- UTILISATION -->
+        <div class="step" style="border-left-color: #28a745">
+          <span class="step-number" style="background: #28a745">✓</span>
+          <h2 style="color: #28a745">Utilisation quotidienne</h2>
+          <div class="step-content">
+            <p><strong>Tous les jours, pour utiliser votre site :</strong></p>
+            <ol>
+              <li>Ouvrez le dossier Stellaris</li>
+              <li>
+                Double-cliquez sur <span class="file-icon">START.bat</span>
+              </li>
+              <li>Attendez que le navigateur s'ouvre</li>
+              <li>C'est tout ! 😊</li>
+            </ol>
+
+            <p style="margin-top: 20px">
+              <strong>La première fois uniquement :</strong>
+            </p>
+            <ul>
+              <li>Le site va télécharger des composants (1-2 minutes)</li>
+              <li>C'est normal, soyez patient</li>
+              <li>Les fois suivantes, ça démarre en 5 secondes !</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ACCÈS ADMIN -->
+        <div class="step" style="border-left-color: #ff6b6b">
+          <span class="step-number" style="background: #ff6b6b">👤</span>
+          <h2 style="color: #ff6b6b">Interface administrateur</h2>
+          <div class="step-content">
+            <p>Pour gérer les rendez-vous et créneaux :</p>
+            <ol>
+              <li>
+                Allez sur :
+                <a
+                  href="http://localhost:3000/admin"
+                  target="_blank"
+                  style="color: #ff6b6b; font-weight: bold"
+                  >http://localhost:3000/admin</a
+                >
+              </li>
+              <li>
+                Quand on vous demande la clé, entrez :
+                <code
+                  style="
+                    background: #ffe6e6;
+                    padding: 5px 12px;
+                    border-radius: 4px;
+                    color: #ff6b6b;
+                    font-weight: bold;
+                  "
+                  >stellaris2025</code
+                >
+              </li>
+              <li>
+                Vous pouvez maintenant créer des créneaux et gérer les demandes
+              </li>
+            </ol>
+
+            <div class="help-box">
+              <strong>💡 Conseil :</strong> Vous pouvez changer cette clé dans
+              le fichier <code>.env</code> si vous voulez plus de sécurité.
+            </div>
+          </div>
+        </div>
+
+        <!-- AIDE -->
+        <div class="step" style="border-left-color: #ffc107">
+          <span class="step-number" style="background: #ffc107">?</span>
+          <h2 style="color: #ffc107">Problèmes courants</h2>
+          <div class="step-content">
+            <p><strong>❌ "Node.js n'est pas installé"</strong></p>
+            <ul>
+              <li>Vérifiez que vous avez bien installé Node.js (Étape 1)</li>
+              <li>Redémarrez votre ordinateur après l'installation</li>
+            </ul>
+
+            <p style="margin-top: 15px">
+              <strong>❌ "Le port 3000 est déjà utilisé"</strong>
+            </p>
+            <ul>
+              <li>Fermez toutes les fenêtres noires ouvertes</li>
+              <li>Relancez START.bat</li>
+            </ul>
+
+            <p style="margin-top: 15px">
+              <strong>❌ "La page ne s'affiche pas"</strong>
+            </p>
+            <ul>
+              <li>Vérifiez que la fenêtre noire est toujours ouverte</li>
+              <li>
+                Essayez de taper manuellement :
+                <code>http://localhost:3000</code>
+              </li>
+              <li>Vérifiez votre pare-feu Windows</li>
+            </ul>
+
+            <p style="margin-top: 15px">
+              <strong>❌ "Erreur lors de l'installation"</strong>
+            </p>
+            <ul>
+              <li>Vérifiez votre connexion internet</li>
+              <li>Désactivez temporairement votre antivirus</li>
+              <li>Relancez START.bat</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RACCOURCIS -->
+        <div style="text-align: center; margin: 40px 0">
+          <h2 style="color: #667eea; margin-bottom: 20px">🔗 Accès rapides</h2>
+          <a href="http://localhost:3000" target="_blank" class="button">
+            🏠 Ouvrir le site
+          </a>
+          <a
+            href="http://localhost:3000/admin"
+            target="_blank"
+            class="button button-secondary"
+          >
+            ⚙️ Interface admin
+          </a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <h3>📚 Résumé ultra-rapide</h3>
+        <p style="margin-top: 15px; font-size: 1.1em">
+          0️⃣ Télécharger et extraire le ZIP depuis GitHub<br />
+          1️⃣ Installer Node.js (une fois)<br />
+          2️⃣ Double-clic sur <strong>setup-env.bat</strong> (une fois)<br />
+          3️⃣ Double-clic sur <strong>START.bat</strong> (à chaque utilisation)
+        </p>
+        <p style="margin-top: 20px; opacity: 0.8">
+          Stellaris - Guide de démarrage pour Windows
+        </p>
+      </div>
     </div>
-</body>
+  </body>
 </html>
