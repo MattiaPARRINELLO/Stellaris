@@ -3,7 +3,64 @@
 ═══════════════════════════════════════════════════════════
 
 👋 BIENVENUE !
-Ce fichier explique comment lancer votre site Stellaris en 3 étapes simples.
+Ce fichier explique comment télécharger et lancer votre site Stellaris.
+
+═══════════════════════════════════════════════════════════
+  📥 TÉLÉCHARGER LE PROJET DEPUIS GITHUB
+═══════════════════════════════════════════════════════════
+
+Si vous n'avez pas encore le projet sur votre ordinateur :
+
+MÉTHODE 1 : Téléchargement ZIP (LA PLUS SIMPLE)
+────────────────────────────────────────────────────
+1. Allez sur la page GitHub du projet
+   (l'adresse vous a été communiquée)
+
+2. Cherchez le bouton vert "Code" en haut à droite
+
+3. Cliquez sur "Code" puis sur "Download ZIP"
+
+4. Un fichier ZIP va se télécharger sur votre ordinateur
+   (il s'appelle généralement "Stellaris-main.zip")
+
+5. Trouvez le fichier téléchargé :
+   - Souvent dans le dossier "Téléchargements"
+   - Ou cliquez sur la flèche de téléchargement en haut
+     de votre navigateur
+
+6. Faites un CLIC DROIT sur le fichier ZIP
+   → Choisissez "Extraire tout..." ou "Extraire ici"
+   
+7. Windows va créer un nouveau dossier "Stellaris-main"
+   ou "Stellaris"
+
+8. Déplacez ce dossier où vous voulez :
+   - Bureau
+   - Documents
+   - Mes Documents
+   - Ou n'importe où !
+
+✅ C'est bon ! Vous avez maintenant le projet sur votre PC.
+   → Ouvrez le dossier et continuez avec les étapes ci-dessous.
+
+
+MÉTHODE 2 : Avec Git (POUR UTILISATEURS AVANCÉS)
+────────────────────────────────────────────────────
+Si vous connaissez Git et l'avez déjà installé :
+
+1. Ouvrez un terminal (cmd ou PowerShell)
+
+2. Allez dans le dossier où vous voulez le projet :
+   cd C:\Users\VotreNom\Documents
+
+3. Clonez le projet :
+   git clone [ADRESSE-DU-REPO-GITHUB]
+
+4. Entrez dans le dossier créé :
+   cd Stellaris
+
+✅ Vous pouvez maintenant suivre les étapes ci-dessous.
+
 
 ═══════════════════════════════════════════════════════════
   📖 GUIDE COMPLET AVEC IMAGES
@@ -28,8 +85,11 @@ Si vous êtes pressé et que Node.js est déjà installé :
 C'est tout ! Le site s'ouvrira automatiquement dans votre navigateur.
 
 ═══════════════════════════════════════════════════════════
-  📋 ÉTAPES COMPLÈTES
+  📋 ÉTAPES COMPLÈTES (APRÈS TÉLÉCHARGEMENT)
 ═══════════════════════════════════════════════════════════
+
+⚠️ Vous devez d'abord avoir téléchargé le projet !
+   (Voir la section "TÉLÉCHARGER LE PROJET" ci-dessus)
 
 ÉTAPE 1 : Installer Node.js (à faire UNE SEULE FOIS)
 ────────────────────────────────────────────────────
@@ -94,15 +154,21 @@ Stellaris/
 └── data/               ← Base de données locale
 
 ═══════════════════════════════════════════════════════════
-  🎯 RÉSUMÉ EN 3 ACTIONS
+  🎯 RÉSUMÉ COMPLET : DE ZÉRO AU SITE QUI FONCTIONNE
 ═══════════════════════════════════════════════════════════
 
-Première fois :
-  1. Installer Node.js depuis https://nodejs.org
-  2. Double-clic sur setup-env.bat
-  3. Double-clic sur START.bat
+SI VOUS N'AVEZ PAS ENCORE LE PROJET :
+  0. Télécharger le ZIP depuis GitHub
+  1. Extraire le ZIP
+  2. Ouvrir le dossier Stellaris
 
-Les fois suivantes :
+PREMIÈRE UTILISATION :
+  1. Installer Node.js depuis https://nodejs.org
+  2. Redémarrer l'ordinateur
+  3. Double-clic sur setup-env.bat
+  4. Double-clic sur START.bat
+
+LES FOIS SUIVANTES :
   1. Double-clic sur START.bat
   C'est tout ! 😊
 
