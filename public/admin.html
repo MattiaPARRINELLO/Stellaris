@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin - Stellaris RDV</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/animations.css" />
+    <link rel="stylesheet" href="/css/mobile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .admin-wrapper {
+        min-height: 100vh;
+        display: flex;
+        background: var(--bg-alt);
+        transition: background 0.3s ease;
+      }
+      .admin-sidebar {
+        width: 260px;
+        background: var(--admin-sidebar-bg);
+        border-right: 1px solid var(--border-color);
+        padding: 2rem 1.25rem;
+        position: sticky;
+        top: 0;
+        max-height: 100vh;
+        overflow-y: auto;
+        color: var(--text-primary);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      .admin-content {
+        flex: 1;
+        padding: 2rem;
+        background: var(--bg-main);
+        color: var(--text-primary);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      .admin-nav-item {
+        display: block;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .admin-nav-item:hover,
+      .admin-nav-item.active {
+        background: var(--admin-nav-hover-bg);
+        color: var(--primary);
+        box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.18);
+      }
+      .auth-panel {
+        background: linear-gradient(
+          135deg,
+          rgba(var(--primary-rgb), 0.12),
+          rgba(var(--secondary-rgb), 0.08)
+        );
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 12px 28px var(--shadow-color);
+      }
+      .auth-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
+      .status-badge {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--admin-status-offline);
+      }
+      .status-badge.active {
+        background: var(--primary);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      .admin-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--border-color);
+        flex-wrap: wrap;
+      }
+      .admin-tab {
+        padding: 0.75rem 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-secondary);
+        font-weight: 600;
+        transition: all 0.3s;
+        position: relative;
+      }
+      .admin-tab.active {
+        color: var(--primary);
+        text-shadow: 0 0 12px rgba(var(--primary-rgb), 0.3);
+      }
+      .admin-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+      }
+      .admin-tab:hover {
+        color: var(--primary);
+      }
+      .tab-panel {
+        display: none;
+      }
+      .tab-panel.active {
+        display: block;
+        animation: fadeInUp 0.3s ease-out;
+      }
+      .form-section {
+        background: var(--admin-panel-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid var(--primary);
+      }
+      .form-section h3 {
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      .input-group {
+        margin-bottom: 1rem;
+      }
+      .input-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--light-text);
+      }
+      .input-group input,
+      .input-group select {
+        width: 100%;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--admin-input-border);
+        border-radius: 6px;
+        background: var(--admin-input-bg);
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+
+      .admin-input {
+        width: 100%;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--admin-input-border);
+        border-radius: 6px;
+        background: var(--admin-input-bg);
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+
+      .admin-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 18px rgba(var(--primary-rgb), 0.25);
+        background: var(--bg-card);
+      }
+      .btn-icon {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0.3rem;
+        transition: transform 0.2s;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+      .btn-icon:hover {
+        transform: scale(1.2);
+      }
+      .btn-delete {
+        opacity: 0.7;
+      }
+      .btn-delete:hover {
+        opacity: 1;
+      }
+      .btn-restore {
+        opacity: 0.8;
+      }
+      .btn-restore:hover {
+        opacity: 1;
+        filter: brightness(1.2);
+      }
+      .slot-card {
+        position: relative;
+        padding: 1rem;
+        min-height: 120px;
+      }
+      .input-group input:focus,
+      .input-group select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 18px rgba(var(--primary-rgb), 0.25);
+        background: var(--bg-card);
+      }
+      .day-editor {
+        background: rgba(var(--primary-rgb), 0.05);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+      }
+      .day-editor h4 {
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+      }
+      .time-slot {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto;
+        gap: 0.5rem;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .time-slot input {
+        padding: 0.4rem;
+        border-radius: 4px;
+        border: 1px solid var(--admin-input-border);
+        background: var(--admin-input-bg);
+        color: var(--text-primary);
+      }
+      .time-slot button {
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        border: 1px solid #ff6b6b;
+        background: rgba(255, 107, 107, 0.05);
+        color: #ff6b6b;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 0.85rem;
+      }
+      .time-slot button:hover {
+        background: rgba(255, 107, 107, 0.2);
+      }
+      .add-slot-btn {
+        padding: 0.6rem 1rem;
+        border: 1px dashed var(--primary);
+        background: none;
+        color: var(--primary);
+        cursor: pointer;
+        border-radius: 4px;
+        margin-top: 0.5rem;
+        transition: all 0.3s;
+        font-weight: 600;
+      }
+      .add-slot-btn:hover {
+        background: rgba(var(--primary-rgb), 0.12);
+        box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.15);
+      }
+      .bookings-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .bookings-table thead {
+        background: var(--admin-table-header-bg);
+      }
+      .bookings-table th,
+      .bookings-table td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.9rem;
+      }
+      .bookings-table tbody tr:hover {
+        background: var(--admin-table-hover-bg);
+      }
+      .slot-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+      }
+      .slot-card {
+        background: var(--admin-slot-card-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 22px var(--shadow-color);
+      }
+      .slot-card h5 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+      .slot-card p {
+        color: var(--gray-text);
+        font-size: 0.85rem;
+        margin: 0.25rem 0;
+      }
+      .btn-group {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+      .confirmation-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+      .confirmation-modal.active {
+        display: flex;
+      }
+      .modal-content {
+        background: var(--darker-bg);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        max-width: 400px;
+        animation: fadeInUp 0.3s ease-out;
+      }
+      .modal-content h3 {
+        margin-bottom: 1rem;
+        color: var(--light-text);
+      }
+      .modal-content p {
+        color: var(--gray-text);
+        margin-bottom: 1.5rem;
+      }
+      .modal-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .modal-buttons button {
+        flex: 1;
+        padding: 0.6rem;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+      .btn-cancel {
+        background: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+      }
+      .btn-cancel:hover {
+        background: var(--admin-nav-hover-bg);
+      }
+      .btn-confirm {
+        background: #ff6b6b;
+        color: white;
+      }
+      .btn-confirm:hover {
+        background: #ff5252;
+      }
+      .search-bar {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .search-bar input {
+        flex: 1;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--admin-input-border);
+        border-radius: 6px;
+        background: var(--admin-input-bg);
+        color: var(--text-primary);
+      }
+      .search-bar button {
+        padding: 0.6rem 1.2rem;
+        background: var(--primary);
+        color: var(--admin-search-btn-color);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+      .search-bar button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.35);
+      }
+      .info-box {
+        background: rgba(var(--accent-rgb), 0.12);
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid var(--accent);
+        margin-bottom: 1.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+      .alert {
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        animation: slideInRight 0.3s ease-out;
+      }
+      .alert.success {
+        background: rgba(var(--primary-rgb), 0.12);
+        border-left: 4px solid var(--primary);
+        color: var(--primary);
+      }
+      .alert.error {
+        background: rgba(255, 107, 107, 0.1);
+        border-left: 4px solid #ff6b6b;
+        color: #ff6b6b;
+      }
+      .alert.info {
+        background: rgba(var(--accent-rgb), 0.12);
+        border-left: 4px solid var(--accent);
+        color: var(--accent);
+      }
+      @media (max-width: 768px) {
+        .admin-wrapper {
+          flex-direction: column;
+        }
+        .admin-sidebar {
+          width: 100%;
+          max-height: auto;
+          position: static;
+          padding: 1rem;
+        }
+        .admin-content {
+          padding: 1rem;
+        }
+        .time-slot {
+          grid-template-columns: 1fr 1fr;
+        }
+        .slot-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-wrapper">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div
+          style="
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+          "
+        >
+          <h2
+            style="
+              color: var(--primary);
+              margin-bottom: 0.5rem;
+              font-size: 1.3rem;
+            "
+          >
+            Admin
+          </h2>
+          <p style="color: var(--gray-text); font-size: 0.85rem">
+            Stellaris RDV
+          </p>
+          <button
+            class="theme-toggle"
+            aria-label="Basculer le thème"
+            title="Changer de thème"
+            style="margin-top: 1rem"
+          >
+            <i class="fas fa-sun icon-sun"></i>
+            <i class="fas fa-moon icon-moon"></i>
+          </button>
+        </div>
+
+        <!-- Auth Panel -->
+        <div class="auth-panel">
+          <label style="display: block; font-weight: 600; margin-bottom: 0.5rem"
+            >Authentification</label
+          >
+          <input
+            id="adminKey"
+            type="password"
+            placeholder="Clé sécurisée"
+            class="admin-input"
+            style="margin-bottom: 0.5rem"
+          />
+          <button
+            id="btnAuthenticate"
+            class="btn btn-primary"
+            style="width: 100%; padding: 0.6rem"
+          >
+            Se connecter
+          </button>
+          <div class="auth-status">
+            <span class="status-badge" id="statusBadge"></span>
+            <span id="authStatus">Déconnecté</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav style="display: flex; flex-direction: column; gap: 0.25rem">
+          <a class="admin-nav-item active" data-section="overview"
+            >📊 Vue d'ensemble</a
+          >
+          <a class="admin-nav-item" data-section="planning">📅 Planning</a>
+          <a class="admin-nav-item" data-section="bookings">📋 Réservations</a>
+          <a class="admin-nav-item" data-section="slots">⏰ Créneaux</a>
+          <a class="admin-nav-item" data-section="settings">⚙️ Paramètres</a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="admin-content">
+        <div id="alertContainer" style="margin-bottom: 1rem"></div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-panel active">
+          <h1 style="margin-bottom: 0.5rem">Vue d'ensemble</h1>
+          <p style="color: var(--gray-text); margin-bottom: 1.5rem">
+            Récapitulatif de votre système de réservation.
+          </p>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 1rem;
+              margin-bottom: 2rem;
+            "
+          >
+            <div
+              style="
+                background: var(--admin-card-bg);
+                padding: 1.5rem;
+                border-radius: 12px;
+                border: 1px solid var(--border-color);
+                box-shadow: 0 12px 28px var(--shadow-color);
+              "
+            >
+              <p style="color: var(--gray-text); font-size: 0.9rem">
+                Total réservations
+              </p>
+              <h2
+                id="statTotal"
+                style="color: var(--primary); margin: 0.5rem 0 0"
+              >
+                -
+              </h2>
+            </div>
+            <div
+              style="
+                background: var(--admin-panel-alt-bg);
+                padding: 1.5rem;
+                border-radius: 12px;
+                border: 1px solid var(--border-color);
+                box-shadow: 0 12px 28px var(--shadow-color);
+              "
+            >
+              <p style="color: var(--gray-text); font-size: 0.9rem">
+                Créneaux dispo
+              </p>
+              <h2
+                id="statSlots"
+                style="color: var(--accent); margin: 0.5rem 0 0"
+              >
+                -
+              </h2>
+            </div>
+            <div
+              style="
+                background: var(--admin-card-bg);
+                padding: 1.5rem;
+                border-radius: 12px;
+                border: 1px solid var(--border-color);
+                box-shadow: 0 12px 28px var(--shadow-color);
+              "
+            >
+              <p style="color: var(--gray-text); font-size: 0.9rem">
+                Taux occupation
+              </p>
+              <h2
+                id="statOccupancy"
+                style="color: var(--light-text); margin: 0.5rem 0 0"
+              >
+                -
+              </h2>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button id="btnLoadOverview" class="btn btn-primary">
+              Actualiser
+            </button>
+            <button id="btnExportAll" class="btn">Exporter tout</button>
+          </div>
+        </div>
+
+        <!-- Planning Tab -->
+        <div id="planning" class="tab-panel">
+          <h1 style="margin-bottom: 0.5rem">Éditer le planning</h1>
+          <p style="color: var(--gray-text); margin-bottom: 1.5rem">
+            Définissez les heures d'ouverture pour chaque jour.
+          </p>
+
+          <div id="planningEditor"></div>
+
+          <div class="btn-group">
+            <button id="btnSavePlanning" class="btn btn-primary">
+              💾 Enregistrer
+            </button>
+            <button id="btnReloadPlanning" class="btn">
+              Annuler les modifications
+            </button>
+          </div>
+        </div>
+
+        <!-- Bookings Tab -->
+        <div id="bookings" class="tab-panel">
+          <h1 style="margin-bottom: 0.5rem">Réservations</h1>
+          <p style="color: var(--gray-text); margin-bottom: 1.5rem">
+            Consultez et gérez les réservations clients.
+          </p>
+
+          <div class="search-bar">
+            <input
+              id="searchBooking"
+              type="text"
+              placeholder="Chercher par nom, email..."
+            />
+            <button id="btnDownloadBookings">📥 Télécharger JSON</button>
+          </div>
+
+          <div class="form-section" style="margin-top: 1rem">
+            <h3>Créer une réservation manuelle</h3>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 0.75rem;
+              "
+            >
+              <div class="input-group">
+                <label>Nom</label
+                ><input id="adminCreateName" type="text" required />
+              </div>
+              <div class="input-group">
+                <label>Email</label
+                ><input id="adminCreateEmail" type="email" required />
+              </div>
+              <div class="input-group">
+                <label>Téléphone</label
+                ><input id="adminCreatePhone" type="tel" required />
+              </div>
+              <div class="input-group">
+                <label>Société</label
+                ><input id="adminCreateCompany" type="text" />
+              </div>
+              <div class="input-group">
+                <label>Secteur</label
+                ><input id="adminCreateSector" type="text" required />
+              </div>
+              <div class="input-group" style="grid-column: 1 / -1">
+                <label>Description</label
+                ><input id="adminCreateDesc" type="text" />
+              </div>
+              <div class="input-group" style="grid-column: 1 / -1">
+                <label>Créneau</label
+                ><select id="adminCreateSlot"></select>
+              </div>
+            </div>
+            <button
+              id="btnAdminCreateBooking"
+              class="btn btn-primary"
+              style="margin-top: 0.75rem"
+            >
+              ➕ Créer la réservation
+            </button>
+          </div>
+
+          <div id="bookingsContainer" style="overflow-x: auto"></div>
+        </div>
+
+        <!-- Slots Tab -->
+        <div id="slots" class="tab-panel">
+          <h1 style="margin-bottom: 0.5rem">Créneaux disponibles</h1>
+          <p style="color: var(--gray-text); margin-bottom: 1.5rem">
+            Aperçu des 14 prochains jours. Les administrateurs voient les
+            créneaux sans restriction de délai.
+          </p>
+
+          <div class="btn-group">
+            <button id="btnRefreshSlots" class="btn btn-primary">
+              🔄 Rafraîchir
+            </button>
+          </div>
+
+          <div class="form-section" style="margin-top: 1rem">
+            <h3>Créneaux bloqués</h3>
+            <div id="blockedSlotsContainer" class="slot-grid"></div>
+          </div>
+
+          <div
+            id="slotsContainer"
+            class="slot-grid"
+            style="margin-top: 1rem"
+          ></div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-panel">
+          <h1 style="margin-bottom: 0.5rem">Paramètres</h1>
+          <p style="color: var(--gray-text); margin-bottom: 1.5rem">
+            Configurez les paramètres globaux.
+          </p>
+
+          <div class="form-section">
+            <h3>Configuration générale</h3>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+              "
+            >
+              <div class="input-group">
+                <label>Fuseau horaire</label>
+                <input id="settingTimezone" type="text" value="Europe/Paris" />
+              </div>
+              <div class="input-group">
+                <label>Durée créneau (minutes)</label>
+                <input
+                  id="settingSlotDuration"
+                  type="number"
+                  min="15"
+                  max="120"
+                  value="30"
+                />
+              </div>
+              <div class="input-group">
+                <label>Max. réservations par créneau</label>
+                <input
+                  id="settingMaxBookings"
+                  type="number"
+                  min="1"
+                  max="10"
+                  value="1"
+                />
+              </div>
+            </div>
+            <button
+              id="btnSaveSettings"
+              class="btn btn-primary"
+              style="margin-top: 1rem"
+            >
+              💾 Enregistrer
+            </button>
+          </div>
+
+          <div class="info-box">
+            ℹ️ Les clés d'API et les configurations avancées sont gérées côté
+            serveur. Contactez un administrateur pour les modifications.
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="confirmation-modal">
+      <div class="modal-content">
+        <h3 id="confirmTitle">Confirmer l'action</h3>
+        <p id="confirmMessage">Êtes-vous sûr de continuer ?</p>
+        <div class="modal-buttons">
+          <button class="btn-cancel" onclick="closeConfirmation()">
+            Annuler
+          </button>
+          <button class="btn-confirm" id="btnConfirmAction">Confirmer</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/admin.js"></script>
+  </body>
+</html>

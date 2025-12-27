@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stellaris Conseil - Optimisation Énergétique</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Animated background with orbs -->
+    <div class="animated-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+    <!-- Subtle noise overlay for premium texture -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <!-- Cursor glow for ambient light effect -->
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <img
+            src="assets/logoNoBg.svg"
+            alt="Stellaris Conseil Logo"
+            class="logo"
+          />
+          <span>Stellaris Conseil</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#booking" class="btn-cta">Prendre RDV</a></li>
+          <li>
+            <button
+              class="theme-toggle"
+              aria-label="Basculer le thème"
+              title="Changer de thème"
+            >
+              <i class="fas fa-sun icon-sun"></i>
+              <i class="fas fa-moon icon-moon"></i>
+            </button>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" aria-hidden="true">
+      <div class="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Optimisez votre facture énergétique</h1>
+        <p>
+          Stellaris Conseil accompagne les entreprises dans la maîtrise et la
+          réduction de leurs coûts énergétiques
+        </p>
+        <div class="glass-cta" aria-hidden="false">
+          <span class="badge">Offert</span>
+          <div class="cta-text">
+            <strong>Audit flash 30 min</strong>
+            <small>Avec un expert énergie</small>
+          </div>
+          <a href="#booking" class="btn btn-primary btn-compact">Réserver</a>
+        </div>
+        <!-- <a href="#booking" class="btn btn-primary">Demander une consultation</a> -->
+      </div>
+      <div class="hero-visual">
+        <div class="floating-icon">
+          <img
+            src="assets/logoNoBg.svg"
+            alt="Stellaris Conseil Logo"
+            class="logo-large"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+      <div class="container">
+        <h2>Nos Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Diagnostic Énergétique</h3>
+            <p>
+              Analyse complète de votre consommation énergétique et
+              identification des économies potentielles
+            </p>
+          </div>
+
+          <div class="service-card glass-panel">
+            <div class="service-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3>Optimisation des Coûts</h3>
+            <p>
+              Stratégies personnalisées pour réduire votre facture énergétique
+              jusqu'à 30%
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Transition Énergétique</h3>
+            <p>
+              Accompagnement vers des solutions éco-responsables et durables
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3>Conseil Stratégique</h3>
+            <p>
+              Assistance dans la sélection des fournisseurs et renégociation de
+              contrats
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <h3>Audit Immobilier</h3>
+            <p>
+              Évaluation des bâtiments pour optimiser leur efficacité
+              énergétique
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3>Suivi & Reporting</h3>
+            <p>
+              Tableaux de bord détaillés et suivi continu de vos économies
+              réalisées
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>Pourquoi Stellaris Conseil ?</h2>
+            <ul class="benefits">
+              <li>
+                <strong>Expertise confirmée</strong> dans le secteur énergétique
+              </li>
+              <li>
+                <strong>Résultats mesurables</strong> et garantis pour vos
+                économies
+              </li>
+              <li>
+                <strong>Approche personnalisée</strong> adaptée à votre secteur
+                d'activité
+              </li>
+              <li>
+                <strong>Transparence totale</strong> dans nos recommandations
+              </li>
+              <li>
+                <strong>Accompagnement long terme</strong> pour votre
+                transformation
+              </li>
+            </ul>
+          </div>
+          <div class="about-stats">
+            <div class="stat">
+              <h3 data-target="500">0</h3>
+              <p>Entreprises accompagnées</p>
+            </div>
+            <div class="stat">
+              <h3 data-target="25">0</h3>
+              <p>d'économies réalisées</p>
+            </div>
+            <div class="stat">
+              <h3 data-target="98">0</h3>
+              <p>de satisfaction client</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+      <div class="container">
+        <h2>Prendre Rendez-vous</h2>
+        <p class="booking-subtitle">
+          Obtenez une consultation gratuite avec nos experts énergétiques
+        </p>
+
+        <form class="booking-form glass-panel" id="bookingForm">
+          <!-- Progress indicator -->
+          <div class="form-progress">
+            <span class="form-progress-dot active" data-step="1"></span>
+            <span class="form-progress-dot" data-step="2"></span>
+            <span class="form-progress-dot" data-step="3"></span>
+          </div>
+
+          <!-- Step 1: Contact Info -->
+          <div class="form-step active" data-step="1">
+            <p class="step-title">Vos coordonnées</p>
+            <div class="form-group">
+              <label for="name">Nom complet *</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Téléphone *</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+            <div class="form-nav-buttons">
+              <button type="button" class="btn btn-primary btn-next" data-next="2">
+                Suivant <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Company Info -->
+          <div class="form-step" data-step="2">
+            <p class="step-title">Votre entreprise</p>
+            <div class="form-group">
+              <label for="company">Nom entreprise *</label>
+              <input type="text" id="company" name="company" required />
+            </div>
+            <div class="form-group">
+              <label for="sector">Secteur d'activité *</label>
+              <select id="sector" name="sector" required>
+                <option value="">-- Sélectionner votre secteur --</option>
+                <option value="industrie">Industrie</option>
+                <option value="retail">Retail / Commerce</option>
+                <option value="healthcare">Santé</option>
+                <option value="education">Éducation</option>
+                <option value="hospitality">Hôtellerie / Restauration</option>
+                <option value="other">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="description">Description de vos besoins</label>
+              <textarea
+                id="description"
+                name="description"
+                rows="3"
+                placeholder="Décrivez brièvement votre situation énergétique..."
+              ></textarea>
+            </div>
+            <div class="form-nav-buttons">
+              <button type="button" class="btn btn-secondary btn-prev" data-prev="1">
+                <i class="fas fa-arrow-left"></i> Retour
+              </button>
+              <button type="button" class="btn btn-primary btn-next" data-next="3">
+                Suivant <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Slot Selection + Confirmation -->
+          <div class="form-step" data-step="3">
+            <p class="step-title">Choisir un créneau</p>
+            
+            <!-- Sélection de créneau depuis le backend (si disponible) -->
+            <div class="form-group" id="slotPicker" style="display: none">
+              <label for="slotSelect">Créneau disponible *</label>
+              <select id="slotSelect" name="slot">
+                <option value="">Chargement des créneaux...</option>
+              </select>
+              <div style="margin-top: 0.75rem;">
+                <button type="button" id="btnNextSlot" class="btn btn-secondary" style="width: 100%;">
+                  <i class="fas fa-clock"></i> Proposer le plus proche
+                </button>
+              </div>
+              <small id="slotHelp" style="opacity: 0.7; display: block; margin-top: 0.5rem; text-align: center;">
+                Les créneaux sont mis à jour en temps réel
+              </small>
+            </div>
+
+            <div class="form-group checkbox">
+              <input type="checkbox" id="terms" name="terms" required />
+              <label for="terms">
+                J'accepte les conditions d'utilisation et la politique de confidentialité *
+              </label>
+            </div>
+
+            <div class="form-nav-buttons">
+              <button type="button" class="btn btn-secondary btn-prev" data-prev="2">
+                <i class="fas fa-arrow-left"></i> Retour
+              </button>
+              <button type="submit" class="btn btn-primary btn-large">
+                <i class="fas fa-check"></i> Confirmer
+              </button>
+            </div>
+          </div>
+
+          <p class="form-info">
+            Nous vous confirmerons votre rendez-vous par email dans les 24h
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Nous Contacter</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Téléphone</h4>
+              <p>+33 (0)1 23 45 67 89</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>contact@stellarisconseil.fr</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Adresse</h4>
+              <p>75 Rue de la Paix, 75000 Paris</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 Stellaris Conseil. Tous droits réservés.</p>
+        <div class="footer-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Conditions d'utilisation</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" aria-hidden="true"></div>
+
+    <!-- Bottom Navigation Bar (Mobile) -->
+    <nav class="bottom-nav" aria-label="Navigation mobile">
+      <ul class="bottom-nav-items">
+        <li>
+          <a href="#services" class="bottom-nav-item">
+            <i class="fas fa-briefcase"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li>
+          <a href="#about" class="bottom-nav-item">
+            <i class="fas fa-info-circle"></i>
+            <span>À propos</span>
+          </a>
+        </li>
+        <li>
+          <a href="#booking" class="bottom-nav-item cta-nav">
+            <i class="fas fa-calendar-plus"></i>
+            <span>RDV</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="bottom-nav-item">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li>
+          <button class="bottom-nav-item theme-toggle-mobile" aria-label="Changer de thème">
+            <i class="fas fa-sun icon-sun"></i>
+            <i class="fas fa-moon icon-moon"></i>
+            <span>Thème</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

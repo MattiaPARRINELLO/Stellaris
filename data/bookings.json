@@ -1,0 +1,54 @@
+[
+  {
+    "id": "f195c4c5-6bea-4632-ba0b-33ddcb2c686a",
+    "name": "fdss",
+    "email": "fddsf@glauk.com",
+    "company": "dssdfds",
+    "phone": "dsfdsfs",
+    "sector": "industrie",
+    "description": "fgdsqqqdffffffffffffs",
+    "slotStart": "2025-12-15T12:00:00.000+01:00",
+    "slotEnd": "2025-12-15T12:30:00.000+01:00",
+    "createdAt": "2025-12-15T11:16:02.046+01:00"
+  },
+  {
+    "id": "2e4e6f72-4d6f-4d41-8de0-3e3a6e039ff2",
+    "name": "rter",
+    "email": "rtretrt@gmail.com",
+    "company": "sfdf",
+    "phone": "06vd10df25",
+    "sector": "healthcare",
+    "description": "dfsqdfds",
+    "slotStart": "2025-12-17T09:00:00.000+01:00",
+    "slotEnd": "2025-12-17T09:30:00.000+01:00",
+    "createdAt": "2025-12-15T11:24:31.267+01:00"
+  },
+  {
+    "id": "80eb0750-46fc-468c-8129-1207621d097b",
+    "name": "Mattia PARRINELLO",
+    "email": "contactperso.mp@gmail.com",
+    "company": "sobot",
+    "phone": "0650586251",
+    "sector": "healthcare",
+    "description": "gay",
+    "slotStart": "2025-12-29T14:00:00.000+01:00",
+    "slotEnd": "2025-12-29T14:30:00.000+01:00",
+    "createdAt": "2025-12-27T19:27:25.557+01:00",
+    "status": "pending",
+    "confirmedAt": null
+  },
+  {
+    "id": "971af703-43fc-48cb-88ca-bbe3c8e967fc",
+    "name": "Mattia PARRINELLO",
+    "email": "contactperso.mp@gmail.com",
+    "company": "dssdfds",
+    "phone": "0650586251",
+    "sector": "education",
+    "description": "fdgfg",
+    "slotStart": "2025-12-29T09:00:00.000+01:00",
+    "slotEnd": "2025-12-29T09:30:00.000+01:00",
+    "createdAt": "2025-12-27T19:28:02.544+01:00",
+    "status": "pending",
+    "confirmedAt": null
+  }
+]

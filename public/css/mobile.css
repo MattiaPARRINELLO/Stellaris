@@ -1,0 +1,639 @@
+/* ===== MOBILE RESPONSIVE - Media Queries ===== */
+
+/* Tablet/Mobile breakpoint (< 768px) */
+@media (max-width: 768px) {
+  /* N'affiche que les 3 premières cartes de services sur mobile */
+  #services .service-card:nth-child(n + 4) {
+    display: none !important;
+  }
+
+  /* Footer compact */
+  footer {
+    padding: 0.5rem 0.5rem 0.7rem 0.5rem;
+    min-height: unset;
+    height: auto;
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  footer .footer-content {
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+  }
+
+  footer .footer-logo {
+    max-width: 38px;
+    height: auto;
+    margin-bottom: 0.2rem;
+  }
+
+  footer .footer-links {
+    gap: 0.7rem;
+    font-size: 0.92rem;
+  }
+
+  footer .footer-social {
+    gap: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+    margin: 0.2rem 0 0 0;
+  }
+
+  /* Liquid glass - hide on mobile */
+  .liquid-glass {
+    position: absolute;
+    right: 5%;
+    top: 8%;
+    width: 280px;
+    height: 190px;
+    border-radius: 22px;
+    display: none;
+  }
+
+  /* Show bottom nav, hide desktop nav CTA */
+  .bottom-nav {
+    display: block;
+  }
+
+  .mobile-menu-overlay {
+    display: block;
+    pointer-events: none;
+  }
+
+  .mobile-menu-overlay.active {
+    pointer-events: auto;
+  }
+
+  /* Add bottom padding for fixed nav */
+  body {
+    padding-bottom: 0;
+  }
+
+  /* Hero gets its own bottom padding to account for bottom nav */
+  .hero {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom) + 1rem) !important;
+  }
+
+  /* Other sections get normal padding */
+  section:not(.hero) {
+    scroll-margin-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+
+  /* Container adjustments */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Navbar mobile */
+  .navbar {
+    padding: 0.75rem 0;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+    gap: 8px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(280px, 80vw);
+    background: var(--bg-navbar-scrolled);
+    border-left: 1px solid var(--border-color);
+    padding: 5rem 1rem 2rem;
+    gap: 0.5rem;
+    box-shadow: -10px 0 40px var(--shadow-color);
+    z-index: 1001;
+    animation: slideInRight 0.3s ease-out;
+    box-sizing: border-box;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .nav-links.open a {
+    padding: 1rem;
+    border-radius: 12px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-links.open a:hover,
+  .nav-links.open a.active {
+    background: var(--primary-light);
+  }
+
+  .nav-links .btn-cta {
+    display: none;
+  }
+
+  /* Ensure any form controls inside the mobile menu don't overflow */
+  .nav-links.open select,
+  .nav-links.open input,
+  .nav-links.open textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Hero mobile */
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 1rem 1rem 2rem;
+    gap: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    order: 2;
+    width: 100%;
+  }
+
+  .hero-visual {
+    order: 1;
+    display: block;
+    margin-bottom: auto;
+  }
+
+  .floating-icon {
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    margin-bottom: 2.25rem;
+    padding: 0 1rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+    padding: 0 0.5rem;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero::before {
+    width: 200px;
+    height: 200px;
+    top: -20%;
+    right: -20%;
+  }
+
+  /* Glass CTA mobile */
+  .glass-cta {
+    width: calc(100% - 2rem);
+    max-width: 100%;
+    margin: auto auto 2rem auto;
+    padding: 1.75rem 1.25rem 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .glass-cta .badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .glass-cta .cta-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .glass-cta .cta-text strong {
+    font-size: 1.15rem;
+    display: block;
+    font-weight: 700;
+  }
+
+  .glass-cta .cta-text small {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    display: block;
+  }
+
+  .glass-cta .btn {
+    width: 75%;
+    margin-top: 0.5rem;
+    padding: 1.1rem 2rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 6px 25px var(--shadow-glow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+  }
+
+  .glass-cta .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-glow);
+  }
+
+  .glass-cta .btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .glass-cta .btn:hover::before {
+    left: 100%;
+  }
+
+  /* Services mobile */
+  .services {
+    padding: 4rem 0;
+    margin-top: 0;
+  }
+
+  .services::before {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 5%,
+      var(--border-color) 20%,
+      var(--border-color) 80%,
+      transparent 95%
+    );
+  }
+
+  .services h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .service-card {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* About mobile */
+  .about {
+    padding: 3rem 0;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .benefits li {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    padding-left: 1.75rem;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat {
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .stat h3 {
+    font-size: 2rem;
+  }
+
+  /* Booking mobile */
+  .booking {
+    padding: 3rem 0;
+  }
+
+  .booking h2 {
+    font-size: 1.5rem;
+  }
+
+  .booking-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .booking-form {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.9rem 1rem;
+    font-size: 16px;
+    border-radius: 12px;
+    min-height: 48px;
+  }
+
+  .form-group.checkbox {
+    align-items: flex-start;
+  }
+
+  .form-group.checkbox input {
+    min-width: 24px;
+    min-height: 24px;
+    margin-top: 2px;
+  }
+
+  .form-group.checkbox label {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .booking-form button[type="submit"],
+  .btn-large {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    min-height: 52px;
+  }
+
+  .form-info {
+    font-size: 0.8rem;
+  }
+
+  /* Contact mobile */
+  .contact {
+    padding: 3rem 0;
+  }
+
+  .contact h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .contact-item i {
+    font-size: 1.5rem;
+    min-width: 40px;
+  }
+
+  .contact-item h4 {
+    font-size: 0.95rem;
+  }
+
+  .contact-item p {
+    font-size: 0.9rem;
+  }
+
+  /* Footer mobile */
+  .footer {
+    padding: 2rem 0;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+
+  .footer .container {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Buttons mobile */
+  .btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    min-height: 48px;
+  }
+
+  /* Hide heavy effects on mobile for performance */
+  .cursor-glow {
+    display: none;
+  }
+
+  /* Reduce orb intensity */
+  .orb {
+    filter: blur(100px);
+    opacity: calc(var(--orb-opacity) * 0.6);
+  }
+
+  /* Floating icon - disable rotation */
+  .floating-icon {
+    animation: none;
+  }
+
+  .logo-large {
+    animation: none;
+  }
+
+  /* Scroll progress thinner */
+  .scroll-progress {
+    height: 2px;
+  }
+
+  /* Notification mobile */
+  .notification {
+    left: 16px !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: calc(80px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* Small mobile (< 480px) */
+@media (max-width: 480px) {
+  .floating-icon {
+    display: flex;
+    width: auto;
+    height: auto;
+    margin: 0 auto 0.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .services h2,
+  .about h2,
+  .booking h2,
+  .contact h2 {
+    font-size: 1.35rem;
+  }
+
+  .service-card {
+    padding: 1rem;
+  }
+
+  .booking-form {
+    padding: 1rem;
+  }
+
+  .glass-cta {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .glass-cta .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 3px 12px var(--shadow-glow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat h3 {
+    font-size: 1.75rem;
+  }
+
+  .bottom-nav-item {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.65rem;
+    min-width: 56px;
+  }
+
+  .bottom-nav-item i {
+    font-size: 1.1rem;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass .blob,
+  .liquid-glass .glass-shine {
+    animation: none !important;
+  }
+}
