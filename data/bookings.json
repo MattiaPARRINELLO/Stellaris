@@ -9,7 +9,9 @@
     "description": "fgdsqqqdffffffffffffs",
     "slotStart": "2025-12-15T12:00:00.000+01:00",
     "slotEnd": "2025-12-15T12:30:00.000+01:00",
-    "createdAt": "2025-12-15T11:16:02.046+01:00"
+    "createdAt": "2025-12-15T11:16:02.046+01:00",
+    "status": "confirmed",
+    "confirmedAt": "2026-04-01T10:36:04.816+02:00"
   },
   {
     "id": "2e4e6f72-4d6f-4d41-8de0-3e3a6e039ff2",
@@ -21,7 +23,9 @@
     "description": "dfsqdfds",
     "slotStart": "2025-12-17T09:00:00.000+01:00",
     "slotEnd": "2025-12-17T09:30:00.000+01:00",
-    "createdAt": "2025-12-15T11:24:31.267+01:00"
+    "createdAt": "2025-12-15T11:24:31.267+01:00",
+    "status": "confirmed",
+    "confirmedAt": "2026-04-01T10:36:06.844+02:00"
   },
   {
     "id": "80eb0750-46fc-468c-8129-1207621d097b",
@@ -34,8 +38,8 @@
     "slotStart": "2025-12-29T14:00:00.000+01:00",
     "slotEnd": "2025-12-29T14:30:00.000+01:00",
     "createdAt": "2025-12-27T19:27:25.557+01:00",
-    "status": "pending",
-    "confirmedAt": null
+    "status": "confirmed",
+    "confirmedAt": "2026-04-01T10:36:08.640+02:00"
   },
   {
     "id": "971af703-43fc-48cb-88ca-bbe3c8e967fc",
@@ -48,7 +52,9 @@
     "slotStart": "2025-12-29T09:00:00.000+01:00",
     "slotEnd": "2025-12-29T09:30:00.000+01:00",
     "createdAt": "2025-12-27T19:28:02.544+01:00",
-    "status": "pending",
-    "confirmedAt": null
+    "status": "rejected",
+    "confirmedAt": null,
+    "rejectedAt": "2026-04-01T10:36:15.870+02:00",
+    "rejectionReason": "Indispo"
   }
 ]

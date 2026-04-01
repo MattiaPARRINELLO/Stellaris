@@ -9,6 +9,8 @@ const { validateSchedule, generateSlots, groupSlotsByDay } = require('../service
 const { sendMail } = require('../services/mail');
 const { requireAdmin } = require('../middleware/auth');
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 // Apply admin middleware to all routes
 router.use(requireAdmin);
 
@@ -185,6 +187,35 @@ router.post('/bookings/:id/reject', async (req, res) => {
         res.json({ booking });
     } catch (e) {
         res.status(500).json({ error: 'reject_failed' });
+    }
+});
+
+// Send a custom email to a booking contact
+router.post('/bookings/:id/send-email', async (req, res) => {
+    try {
+        const subject = typeof req.body?.subject === 'string' ? req.body.subject.trim() : '';
+        const message = typeof req.body?.message === 'string' ? req.body.message.trim() : '';
+        if (!subject) return res.status(400).json({ error: 'invalid_subject' });
+        if (!message) return res.status(400).json({ error: 'invalid_message' });
+
+        const bookings = await readJson(BOOKINGS_PATH);
+        const booking = bookings.find(b => b.id === req.params.id);
+        if (!booking) return res.status(404).json({ error: 'booking_not_found' });
+
+        const recipient = typeof booking.email === 'string' ? booking.email.trim() : '';
+        if (!EMAIL_REGEX.test(recipient)) return res.status(400).json({ error: 'invalid_booking_email' });
+
+        await sendMail({
+            to: recipient,
+            subject,
+            text: message
+        });
+
+        logInfo('admin manual email sent', { bookingId: booking.id, to: recipient });
+        res.json({ ok: true });
+    } catch (e) {
+        logError('admin_send_email_failed', e);
+        res.status(500).json({ error: 'send_email_failed' });
     }
 });
 

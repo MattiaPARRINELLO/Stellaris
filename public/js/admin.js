@@ -12,10 +12,12 @@ let allBookings = [];
 let isAuthenticated = false;
 let authTimeout = null;
 let confirmCallback = null;
+let currentFilter = 'all';
 
 const DAYS_FR = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
 const MIN_KEY_LENGTH = 4;
 const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 mins
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function adminFetch(path, opts = {}) {
     const key = adminKeyInput.value || '';
@@ -117,7 +119,7 @@ async function loadSchedule() {
 async function loadBookings() {
     try {
         console.log('[admin] load bookings');
-        const res = await adminFetch('/api/bookings');
+        const res = await adminFetch('/api/admin/bookings');
         if (!res.ok) throw new Error('unauthorized');
         const data = await res.json();
         allBookings = Array.isArray(data) ? data : (data.bookings || []);
@@ -199,6 +201,10 @@ function updateSettingsUI() {
     document.getElementById('settingTimezone').value = currentSchedule.timezone || 'Europe/Paris';
     document.getElementById('settingSlotDuration').value = currentSchedule.slotDurationMinutes || 30;
     document.getElementById('settingMaxBookings').value = currentSchedule.maxBookingsPerSlot || 1;
+    const notifyInput = document.getElementById('settingAdminNotifyEmail');
+    if (notifyInput) {
+        notifyInput.value = currentSchedule.adminNotifyEmail || '';
+    }
 }
 
 function renderPlanningEditor() {
@@ -285,30 +291,69 @@ async function savePlanning() {
     });
 }
 
+function getFilteredBookings(list, filter) {
+    if (filter === 'all') return list;
+    return list.filter(b => (b.status || 'pending') === filter);
+}
+
+function updatePendingBadges() {
+    const pendingCount = allBookings.filter(b => (b.status || 'pending') === 'pending').length;
+    const badge = document.getElementById('pendingBadge');
+    const navBadge = document.getElementById('navPendingBadge');
+    if (badge) {
+        badge.textContent = pendingCount;
+        badge.style.display = pendingCount > 0 ? 'inline-block' : 'none';
+    }
+    if (navBadge) {
+        navBadge.textContent = pendingCount;
+        navBadge.style.display = pendingCount > 0 ? 'inline-block' : 'none';
+    }
+}
+
 function renderBookings(list) {
     console.log('[admin] render bookings', list?.length || 0);
     const container = document.getElementById('bookingsContainer');
-    if (!list || list.length === 0) {
-        container.innerHTML = '<p style="color:var(--text-secondary)">Aucune réservation.</p>';
+    updatePendingBadges();
+
+    // Apply current filter
+    const filtered = getFilteredBookings(list, currentFilter);
+
+    if (!filtered || filtered.length === 0) {
+        const msg = currentFilter === 'all'
+            ? 'Aucune réservation.'
+            : `Aucune réservation ${currentFilter === 'pending' ? 'en attente' : currentFilter === 'confirmed' ? 'confirmée' : currentFilter === 'rejected' ? 'refusée' : 'annulée'}.`;
+        container.innerHTML = `<p style="color:var(--text-secondary)">${msg}</p>`;
         return;
     }
+
+    const statusLabels = {
+        pending: 'En attente',
+        confirmed: 'Confirmée',
+        rejected: 'Refusée',
+        cancelled: 'Annulée'
+    };
+
     const table = document.createElement('table');
     table.className = 'bookings-table';
     const head = document.createElement('thead');
     head.innerHTML = '<tr><th>Nom</th><th>Email</th><th>Téléphone</th><th>Société</th><th>Créneau</th><th>Créée</th><th>Statut</th><th>Actions</th></tr>';
     table.appendChild(head);
     const body = document.createElement('tbody');
-    for (const b of list) {
+    for (const b of filtered) {
         const startDt = new Date(b.slotStart);
         const createdDt = new Date(b.createdAt);
         const status = b.status || 'pending';
-        const statusLabel = status === 'confirmed' ? 'Confirmée' : status === 'rejected' ? 'Refusée' : 'En attente';
+        const label = statusLabels[status] || status;
         const tr = document.createElement('tr');
         const actions = [];
         if (status === 'pending') {
             actions.push('<button class="btn btn-primary btn-confirm-booking">Confirmer</button>');
             actions.push('<button class="btn btn-secondary btn-reject-booking">Refuser</button>');
-        } else {
+        }
+        if (b.email) {
+            actions.push('<button class="btn btn-compact btn-email-booking">Envoyer un mail</button>');
+        }
+        if (actions.length === 0) {
             actions.push('<span style="color:var(--text-secondary)">—</span>');
         }
         tr.innerHTML = `
@@ -318,13 +363,14 @@ function renderBookings(list) {
             <td>${escapeHtml(b.company || '')}</td>
             <td>${startDt.toLocaleString('fr-FR').substring(0, 16)}</td>
             <td>${createdDt.toLocaleString('fr-FR').substring(0, 10)}</td>
-            <td>${statusLabel}</td>
+            <td><span class="status-label ${status}">${label}</span></td>
             <td style="display:flex; gap:0.25rem; flex-wrap:wrap; align-items:center;">${actions.join('')}</td>
         `;
         if (status === 'pending') {
             tr.querySelector('.btn-confirm-booking').addEventListener('click', () => confirmBooking(b.id));
             tr.querySelector('.btn-reject-booking').addEventListener('click', () => rejectBooking(b.id));
         }
+        tr.querySelector('.btn-email-booking')?.addEventListener('click', () => sendBookingEmail(b));
         body.appendChild(tr);
     }
     table.appendChild(body);
@@ -522,6 +568,70 @@ async function rejectBooking(bookingId) {
     });
 }
 
+function getEmailDraftForBooking(booking) {
+    const start = booking?.slotStart ? new Date(booking.slotStart) : null;
+    const slotLabel = start && !Number.isNaN(start.getTime())
+        ? start.toLocaleString('fr-FR', { dateStyle: 'full', timeStyle: 'short' })
+        : 'votre créneau';
+    const status = booking?.status || 'pending';
+    const statusLabel = status === 'confirmed'
+        ? 'confirmée'
+        : status === 'rejected'
+            ? 'refusée'
+            : status === 'cancelled'
+                ? 'annulée'
+                : 'en attente';
+    return {
+        subject: `Suivi de votre rendez-vous Stellaris (${statusLabel})`,
+        message: [
+            `Bonjour ${booking?.name || ''},`,
+            '',
+            `Nous vous contactons concernant votre demande de rendez-vous du ${slotLabel}.`,
+            '',
+            'Cordialement,',
+            'Stellaris Conseil'
+        ].join('\n')
+    };
+}
+
+async function sendBookingEmail(booking) {
+    if (!isAuthenticated) {
+        showAlert('error', 'Veuillez vous authentifier');
+        return;
+    }
+    const recipient = String(booking?.email || '').trim();
+    if (!EMAIL_REGEX.test(recipient)) {
+        showAlert('error', 'Adresse email client invalide');
+        return;
+    }
+
+    const draft = getEmailDraftForBooking(booking);
+    const subject = window.prompt(`Sujet du mail pour ${recipient}`, draft.subject);
+    if (subject === null) return;
+    const message = window.prompt('Message du mail', draft.message);
+    if (message === null) return;
+    if (!subject.trim() || !message.trim()) {
+        showAlert('error', 'Sujet et message sont requis');
+        return;
+    }
+
+    confirmAction('Envoyer ce mail ?', `Le message sera envoyé à ${recipient}.`, async () => {
+        try {
+            const res = await adminFetch(`/api/admin/bookings/${booking.id}/send-email`, {
+                method: 'POST',
+                body: JSON.stringify({ subject: subject.trim(), message: message.trim() })
+            });
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                throw new Error(err.error || 'send_email_failed');
+            }
+            showAlert('success', 'Email envoyé au client');
+        } catch (e) {
+            showAlert('error', 'Impossible d\'envoyer le mail');
+        }
+    });
+}
+
 function confirmAction(title, message, callback) {
     console.log('[admin] confirmAction called', title);
     document.getElementById('confirmTitle').textContent = title;
@@ -577,7 +687,7 @@ document.getElementById('btnRefreshSlots')?.addEventListener('click', loadSlots)
 document.getElementById('btnDownloadBookings')?.addEventListener('click', async () => {
     if (!isAuthenticated) { showAlert('error', 'Non authentifié'); return; }
     try {
-        const res = await adminFetch('/api/bookings');
+        const res = await adminFetch('/api/admin/bookings');
         if (!res.ok) throw new Error('unauthorized');
         downloadJSON('reservations.json', allBookings);
         showAlert('success', 'Fichier téléchargé');
@@ -591,6 +701,7 @@ document.getElementById('btnSaveSettings')?.addEventListener('click', async () =
     const tz = document.getElementById('settingTimezone').value;
     const duration = parseInt(document.getElementById('settingSlotDuration').value);
     const maxBookings = parseInt(document.getElementById('settingMaxBookings').value);
+    const adminNotifyEmail = document.getElementById('settingAdminNotifyEmail')?.value.trim() || '';
 
     if (duration < 15 || duration > 120) {
         showAlert('error', 'Durée: entre 15 et 120 minutes');
@@ -600,21 +711,31 @@ document.getElementById('btnSaveSettings')?.addEventListener('click', async () =
         showAlert('error', 'Max réservations: entre 1 et 10');
         return;
     }
+    if (adminNotifyEmail && !EMAIL_REGEX.test(adminNotifyEmail)) {
+        showAlert('error', 'Email admin de notification invalide');
+        return;
+    }
 
     currentSchedule.timezone = tz;
     currentSchedule.slotDurationMinutes = duration;
     currentSchedule.maxBookingsPerSlot = maxBookings;
+    currentSchedule.adminNotifyEmail = adminNotifyEmail;
     await savePlanning();
 });
 
 document.getElementById('searchBooking')?.addEventListener('input', (e) => {
     const q = e.target.value.toLowerCase();
-    const filtered = allBookings.filter(b =>
+    if (!q) {
+        renderBookings(allBookings);
+        return;
+    }
+    const searched = allBookings.filter(b =>
         (b.name || '').toLowerCase().includes(q) ||
         (b.email || '').toLowerCase().includes(q) ||
-        (b.company || '').toLowerCase().includes(q)
+        (b.company || '').toLowerCase().includes(q) ||
+        (b.phone || '').toLowerCase().includes(q)
     );
-    renderBookings(filtered);
+    renderBookings(searched);
 });
 
 btnConfirmAction.addEventListener('click', async () => {
@@ -625,6 +746,16 @@ btnConfirmAction.addEventListener('click', async () => {
         console.log('[admin] executing callback');
         await callback();
     }
+});
+
+// Filter buttons
+document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderBookings(allBookings);
+    });
 });
 
 // Init

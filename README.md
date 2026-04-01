@@ -61,17 +61,17 @@ cp .env.example .env
 
 Variables d'environnement (`.env`) :
 
-| Variable             | Description                     | Défaut         |
-| -------------------- | ------------------------------- | -------------- |
-| `PORT`               | Port du serveur                 | `3000`         |
-| `ADMIN_API_KEY`      | Clé API pour l'interface admin  | `changeme`     |
-| `DEBUG`              | Activer les logs de debug       | `false`        |
-| `SMTP_HOST`          | Serveur SMTP                    | -              |
-| `SMTP_PORT`          | Port SMTP                       | `587`          |
-| `SMTP_USER`          | Utilisateur SMTP                | -              |
-| `SMTP_PASS`          | Mot de passe SMTP               | -              |
-| `SMTP_FROM`          | Adresse expéditeur              | `no-reply@...` |
-| `ADMIN_NOTIFY_EMAIL` | Email de notification admin     | -              |
+| Variable             | Description                    | Défaut         |
+| -------------------- | ------------------------------ | -------------- |
+| `PORT`               | Port du serveur                | `3000`         |
+| `ADMIN_API_KEY`      | Clé API pour l'interface admin | `changeme`     |
+| `DEBUG`              | Activer les logs de debug      | `false`        |
+| `SMTP_HOST`          | Serveur SMTP                   | -              |
+| `SMTP_PORT`          | Port SMTP                      | `587`          |
+| `SMTP_USER`          | Utilisateur SMTP               | -              |
+| `SMTP_PASS`          | Mot de passe SMTP              | -              |
+| `SMTP_FROM`          | Adresse expéditeur             | `no-reply@...` |
+| `ADMIN_NOTIFY_EMAIL` | Email de notification admin (fallback) | -       |
 
 ## 🏃 Démarrage
 
@@ -111,6 +111,7 @@ Puis ouvrir http://localhost:3000
 | POST    | `/api/admin/bookings`             | Créer réservation (admin) |
 | POST    | `/api/admin/bookings/:id/confirm` | Confirmer réservation     |
 | POST    | `/api/admin/bookings/:id/reject`  | Refuser réservation       |
+| POST    | `/api/admin/bookings/:id/send-email` | Envoyer un email manuel client |
 
 ## 🎨 Frontend
 
@@ -132,6 +133,7 @@ Le CSS est découpé en 5 fichiers pour une meilleure maintenabilité :
 ## 📝 Notes
 
 - Les emails sont logués si SMTP n'est pas configuré (pas d'échec bloquant)
+- L'email de notification admin se configure depuis l'interface admin (onglet Paramètres), avec fallback sur `ADMIN_NOTIFY_EMAIL`
 - Les créneaux peuvent être bloqués/débloqués via l'interface admin
 - Les réservations peuvent être confirmées ou refusées (email client envoyé)
 - Délai minimum de 5h avant un créneau pour réserver

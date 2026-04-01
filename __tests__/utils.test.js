@@ -28,19 +28,19 @@ describe('Logger Utils', () => {
 
   test('logDebug devrait logger uniquement si DEBUG=true', () => {
     const originalDebug = process.env.DEBUG;
-    
+
     process.env.DEBUG = 'false';
     logDebug('Debug message');
     expect(consoleLogSpy).not.toHaveBeenCalled();
 
     consoleLogSpy.mockClear();
     process.env.DEBUG = 'true';
-    
+
     // Recharger le module pour prendre en compte le nouveau DEBUG_ENABLED
     jest.resetModules();
     const { logDebug: logDebugReloaded } = require('../src/utils/logger');
     const consoleDebugSpy = jest.spyOn(console, 'debug').mockImplementation();
-    
+
     logDebugReloaded('Debug message');
     expect(consoleDebugSpy).toHaveBeenCalledWith('[debug]', 'Debug message');
 
@@ -89,9 +89,9 @@ describe('JSON Utils', () => {
   test('writeJson devrait créer le dossier parent si inexistant', async () => {
     const nestedFile = path.join(testDir, 'nested', 'deep', 'test.json');
     const data = { nested: true };
-    
+
     await writeJson(nestedFile, data);
-    
+
     expect(fs.existsSync(nestedFile)).toBe(true);
     const result = await readJson(nestedFile);
     expect(result).toEqual(data);

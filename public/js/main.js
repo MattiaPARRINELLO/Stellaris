@@ -147,18 +147,25 @@ const setupActiveNav = () => {
     map.forEach((_, sec) => observer.observe(sec));
 };
 
-// Booking Form Handler + Slot loading
+// ===== Booking Form Handler + Visual Slot Picker =====
 const bookingForm = document.getElementById('bookingForm');
-const slotPicker = document.getElementById('slotPicker');
 const slotSelect = document.getElementById('slotSelect');
-const btnNextSlot = document.getElementById('btnNextSlot');
 const slotHelp = document.getElementById('slotHelp');
 const submitBtn = bookingForm ? bookingForm.querySelector('button[type="submit"]') : null;
 
-async function loadSlotsIfAvailable() {
+// Slot data cache
+let allSlotDays = [];
+let selectedDate = null;
+let selectedSlotStart = null;
+let weekOffset = 0;
+
+const DAY_NAMES_SHORT = ['dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam'];
+const MONTH_NAMES = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+
+async function loadSlotsData() {
     try {
         const now = new Date();
-        const to = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+        const to = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
         const params = new URLSearchParams({
             from: now.toISOString(),
             to: to.toISOString()
@@ -166,98 +173,191 @@ async function loadSlotsIfAvailable() {
         const resp = await fetch(`/api/slots?${params.toString()}&grouped=1`);
         if (!resp.ok) throw new Error('slots_failed');
         const data = await resp.json();
-        if (!data.days || data.days.length === 0) {
-            if (slotPicker) slotPicker.style.display = '';
-            if (slotSelect) {
-                slotSelect.innerHTML = '';
-                const opt = document.createElement('option');
-                opt.value = '';
-                opt.textContent = 'Aucun créneau disponible pour le moment';
-                opt.disabled = true;
-                opt.selected = true;
-                slotSelect.appendChild(opt);
-            }
-            if (slotHelp) slotHelp.textContent = "Agenda indisponible ou complet. Réessayez plus tard.";
-            if (submitBtn) submitBtn.disabled = true;
-            return;
-        }
-        // Populate select grouped by day
-        if (slotSelect) {
-            slotSelect.innerHTML = '';
-            const dayFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: '2-digit', month: 'short' });
-            const timeFormatter = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit' });
-            for (const day of data.days) {
-                const groupLabelDate = new Date(day.date + 'T00:00:00');
-                const optgroup = document.createElement('optgroup');
-                optgroup.label = dayFormatter.format(groupLabelDate).replace(/\.$/, '');
-                for (const s of day.slots) {
-                    const start = new Date(s.start);
-                    const end = new Date(s.end);
-                    const opt = document.createElement('option');
-                    opt.value = s.start;
-                    opt.textContent = `${timeFormatter.format(start)}–${timeFormatter.format(end)}`;
-                    optgroup.appendChild(opt);
-                }
-                slotSelect.appendChild(optgroup);
-            }
-        }
-        if (submitBtn) submitBtn.disabled = false;
-        if (slotPicker) slotPicker.style.display = '';
+        allSlotDays = data.days || [];
+        renderDatePicker();
+        if (slotHelp) slotHelp.textContent = allSlotDays.length
+            ? 'Sélectionnez une date puis un horaire'
+            : 'Aucun créneau disponible pour le moment';
     } catch (_) {
-        // Backend not available: show message and disable submit
-        if (slotPicker) slotPicker.style.display = '';
-        if (slotSelect) {
-            slotSelect.innerHTML = '';
-            const opt = document.createElement('option');
-            opt.value = '';
-            opt.textContent = "Impossible de charger l'agenda";
-            opt.disabled = true;
-            opt.selected = true;
-            slotSelect.appendChild(opt);
-        }
-        if (slotHelp) slotHelp.textContent = "Veuillez réessayer plus tard.";
-        if (submitBtn) submitBtn.disabled = true;
+        allSlotDays = [];
+        renderDatePicker();
+        if (slotHelp) slotHelp.textContent = 'Impossible de charger les créneaux. Réessayez plus tard.';
     }
 }
 
-if (btnNextSlot) {
-    btnNextSlot.addEventListener('click', async () => {
-        try {
-            const resp = await fetch('/api/slots/next');
-            if (!resp.ok) throw new Error('next_failed');
-            const { next } = await resp.json();
-            if (next && slotSelect) {
-                // If not present in list, add it first
-                if (![...slotSelect.options].some(o => o.value === next.start)) {
-                    const start = new Date(next.start);
-                    const end = new Date(next.end);
-                    const df = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: '2-digit', month: 'short' });
-                    const tf = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit' });
-                    const opt = document.createElement('option');
-                    opt.value = next.start;
-                    const day = df.format(start).replace(/\.$/, '');
-                    opt.textContent = `${day} ${tf.format(start)}–${tf.format(end)} (prochain)`;
-                    slotSelect.prepend(opt);
-                }
-                slotSelect.value = next.start;
-                showNotification('success', 'Prochain créneau sélectionné.');
-            } else {
-                showNotification('error', 'Aucun créneau prochain disponible.');
-            }
-        } catch (e) {
-            showNotification('error', "Impossible de récupérer le prochain créneau.");
-        }
-    });
+function getWeekDays(offset) {
+    const today = new Date();
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - ((today.getDay() + 6) % 7) + offset * 7);
+    const days = [];
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        days.push(d);
+    }
+    return days;
 }
 
-// Load slots on startup (non-blocking)
-loadSlotsIfAvailable();
+function dateToISO(d) {
+    return d.toISOString().split('T')[0];
+}
+
+function renderDatePicker() {
+    const container = document.getElementById('datePickerDays');
+    const label = document.getElementById('datePickerLabel');
+    const prevBtn = document.getElementById('datePrevWeek');
+    if (!container || !label) return;
+
+    const weekDays = getWeekDays(weekOffset);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Build a map of available dates
+    const availableDates = new Map();
+    for (const day of allSlotDays) {
+        availableDates.set(day.date, day.slots.length);
+    }
+
+    // Label: month range
+    const firstDay = weekDays[0];
+    const lastDay = weekDays[6];
+    if (firstDay.getMonth() === lastDay.getMonth()) {
+        label.textContent = `${firstDay.getDate()} – ${lastDay.getDate()} ${MONTH_NAMES[firstDay.getMonth()]} ${firstDay.getFullYear()}`;
+    } else {
+        label.textContent = `${firstDay.getDate()} ${MONTH_NAMES[firstDay.getMonth()].substring(0, 3)} – ${lastDay.getDate()} ${MONTH_NAMES[lastDay.getMonth()].substring(0, 3)} ${lastDay.getFullYear()}`;
+    }
+
+    // Disable prev if first week contains today
+    if (prevBtn) prevBtn.disabled = weekOffset <= 0;
+
+    container.innerHTML = '';
+    for (const d of weekDays) {
+        const iso = dateToISO(d);
+        const slotCount = availableDates.get(iso) || 0;
+        const isPast = d < today;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'date-day-btn';
+        if (selectedDate === iso) btn.classList.add('selected');
+        if (isPast || slotCount === 0) {
+            btn.disabled = true;
+            btn.classList.add('empty');
+        }
+        btn.innerHTML = `
+            <span class="day-name">${DAY_NAMES_SHORT[d.getDay()]}</span>
+            <span class="day-num">${d.getDate()}</span>
+            <span class="day-slots-count">${slotCount > 0 ? slotCount + ' dispo' : '—'}</span>
+        `;
+        btn.addEventListener('click', () => {
+            selectedDate = iso;
+            selectedSlotStart = null;
+            if (slotSelect) slotSelect.value = '';
+            renderDatePicker();
+            renderTimeSlots(iso);
+        });
+        container.appendChild(btn);
+    }
+}
+
+function renderTimeSlots(dateISO) {
+    const container = document.getElementById('timeSlots');
+    if (!container) return;
+
+    const dayData = allSlotDays.find(d => d.date === dateISO);
+    if (!dayData || dayData.slots.length === 0) {
+        container.innerHTML = '<p class="time-slots-placeholder">Aucun créneau disponible ce jour</p>';
+        return;
+    }
+
+    const tf = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    const grid = document.createElement('div');
+    grid.className = 'time-slots-grid';
+
+    for (const s of dayData.slots) {
+        const start = new Date(s.start);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'time-slot-btn';
+        if (selectedSlotStart === s.start) btn.classList.add('selected');
+        btn.textContent = tf.format(start);
+        btn.addEventListener('click', () => {
+            selectedSlotStart = s.start;
+            if (slotSelect) {
+                // Ensure option exists
+                let opt = slotSelect.querySelector(`option[value="${CSS.escape(s.start)}"]`);
+                if (!opt) {
+                    opt = document.createElement('option');
+                    opt.value = s.start;
+                    slotSelect.appendChild(opt);
+                }
+                slotSelect.value = s.start;
+            }
+            // Update all time buttons
+            grid.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        });
+        grid.appendChild(btn);
+    }
+
+    container.innerHTML = '';
+    container.appendChild(grid);
+}
+
+// Week navigation
+document.getElementById('datePrevWeek')?.addEventListener('click', () => {
+    if (weekOffset > 0) {
+        weekOffset--;
+        renderDatePicker();
+    }
+});
+document.getElementById('dateNextWeek')?.addEventListener('click', () => {
+    weekOffset++;
+    renderDatePicker();
+});
+
+// Build recap before submission
+function buildRecap() {
+    const recap = document.getElementById('bookingRecap');
+    if (!recap) return;
+
+    const name = document.getElementById('name')?.value || '';
+    const email = document.getElementById('email')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+    const company = document.getElementById('company')?.value || '';
+    const sector = document.getElementById('sector');
+    const sectorLabel = sector ? (sector.options[sector.selectedIndex]?.text || '') : '';
+
+    let slotLabel = '—';
+    if (selectedSlotStart) {
+        const start = new Date(selectedSlotStart);
+        const df = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+        const tf = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        slotLabel = `${df.format(start)} à ${tf.format(start)}`;
+    }
+
+    recap.innerHTML = `
+        <div class="recap-row"><span class="recap-label">Nom</span><span class="recap-value">${escapeHtmlPublic(name)}</span></div>
+        <div class="recap-row"><span class="recap-label">Email</span><span class="recap-value">${escapeHtmlPublic(email)}</span></div>
+        <div class="recap-row"><span class="recap-label">Téléphone</span><span class="recap-value">${escapeHtmlPublic(phone)}</span></div>
+        <div class="recap-row"><span class="recap-label">Entreprise</span><span class="recap-value">${escapeHtmlPublic(company)}</span></div>
+        <div class="recap-row"><span class="recap-label">Secteur</span><span class="recap-value">${escapeHtmlPublic(sectorLabel)}</span></div>
+        <div class="recap-slot"><i class="fas fa-calendar-check"></i> ${escapeHtmlPublic(slotLabel)}</div>
+    `;
+}
+
+function escapeHtmlPublic(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+}
+
+// Load slots on startup
+loadSlotsData();
 
 if (bookingForm) {
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Get form data
         const formData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
@@ -265,10 +365,8 @@ if (bookingForm) {
             phone: document.getElementById('phone').value,
             sector: document.getElementById('sector').value,
             description: document.getElementById('description').value,
-            timestamp: new Date().toISOString()
         };
 
-        // Slot is required now; ensure a value is selected
         const selected = slotSelect ? slotSelect.value : '';
         if (!selected) {
             showNotification('error', 'Veuillez sélectionner un créneau.');
@@ -276,38 +374,50 @@ if (bookingForm) {
         }
         formData.slotStart = selected;
 
+        // Disable submit during request
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+        }
+
         try {
-            // Send data to server (you'll need to set up a backend)
             const response = await fetch('/api/bookings', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
-            }).catch(() => {
-                // If server not available, store locally
-                console.log('Booking data:', formData);
-                return { ok: true };
             });
 
             if (response && response.ok) {
-                // Show success message
-                showNotification('success', 'Demande envoyée ! Vérifiez vos emails pour la confirmation de votre rendez-vous.');
+                showNotification('success', 'Demande envoyée ! Vous recevrez un email de confirmation.');
                 bookingForm.reset();
-
-                // Log booking data for now
-                console.log('Booking received:', formData);
-                storeBookingLocally(formData);
+                selectedDate = null;
+                selectedSlotStart = null;
+                weekOffset = 0;
                 // Reload slots to reflect decreased availability
-                loadSlotsIfAvailable();
+                loadSlotsData();
+                // Reset form to step 1
+                const steps = bookingForm.querySelectorAll('.form-step');
+                const dots = bookingForm.querySelectorAll('.form-progress-dot');
+                steps.forEach(s => s.classList.remove('active'));
+                dots.forEach(d => { d.classList.remove('active', 'completed'); });
+                if (steps[0]) steps[0].classList.add('active');
+                if (dots[0]) dots[0].classList.add('active');
             } else if (response.status === 409) {
-                showNotification('error', 'Créneau indisponible. Veuillez choisir un créneau proposé.');
+                showNotification('error', 'Ce créneau vient d\'être pris. Veuillez en choisir un autre.');
+                loadSlotsData();
             } else {
-                showNotification('error', 'Une erreur est survenue. Veuillez réessayer.');
+                const data = await response.json().catch(() => ({}));
+                showNotification('error', data.error === 'slot_too_soon'
+                    ? 'Ce créneau est trop proche. Veuillez en choisir un plus tard.'
+                    : 'Une erreur est survenue. Veuillez réessayer.');
             }
         } catch (error) {
-            console.error('Error:', error);
-            showNotification('error', 'Une erreur est survenue. Veuillez réessayer.');
+            showNotification('error', 'Erreur de connexion. Veuillez réessayer.');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Confirmer le rendez-vous';
+            }
         }
     });
 }
@@ -354,12 +464,6 @@ function showNotification(type, message) {
     }, 4000);
 }
 
-// Store bookings locally (for demo purposes)
-function storeBookingLocally(booking) {
-    let bookings = JSON.parse(localStorage.getItem('stellaris_bookings') || '[]');
-    bookings.push(booking);
-    localStorage.setItem('stellaris_bookings', JSON.stringify(bookings));
-}
 
 // Add animations
 const style = document.createElement('style');
@@ -784,9 +888,32 @@ function initMultiStepForm() {
 
         currentStep = stepNum;
 
+        // Build recap when entering step 4
+        if (stepNum === 4 && typeof buildRecap === 'function') {
+            buildRecap();
+        }
+
         // Scroll to form on mobile
         if (window.innerWidth <= 768) {
             form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
+    // Field-level validation helpers
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[\d\s\+\-\(\)\.]{7,20}$/;
+
+    const setFieldError = (field, hasError) => {
+        const group = field.closest('.form-group');
+        if (!group) return;
+        if (hasError) {
+            group.classList.add('has-error');
+            group.classList.remove('has-success');
+        } else if (field.value.trim()) {
+            group.classList.remove('has-error');
+            group.classList.add('has-success');
+        } else {
+            group.classList.remove('has-error', 'has-success');
         }
     };
 
@@ -795,32 +922,46 @@ function initMultiStepForm() {
         const step = form.querySelector(`.form-step[data-step="${stepNum}"]`);
         if (!step) return true;
 
+        // Step 3: require slot selection
+        if (stepNum === 3) {
+            if (!selectedSlotStart) {
+                showNotification('error', 'Veuillez sélectionner un créneau horaire.');
+                return false;
+            }
+            return true;
+        }
+
         const requiredFields = step.querySelectorAll('[required]');
         let isValid = true;
+        let firstError = null;
 
         requiredFields.forEach(field => {
+            // Skip checkboxes in validation (handled at submit)
+            if (field.type === 'checkbox') return;
+
+            let fieldValid = true;
+
             if (!field.value.trim()) {
-                isValid = false;
-                field.classList.add('error');
-                field.style.borderColor = '#ff6b6b';
-            } else {
-                field.classList.remove('error');
-                field.style.borderColor = '';
+                fieldValid = false;
+            } else if (field.type === 'email' && !emailRegex.test(field.value)) {
+                fieldValid = false;
+                const errSpan = field.parentElement?.querySelector('.field-error');
+                if (errSpan) errSpan.textContent = 'Veuillez entrer un email valide';
+            } else if (field.type === 'tel' && !phoneRegex.test(field.value.replace(/\s/g, ''))) {
+                fieldValid = false;
+                const errSpan = field.parentElement?.querySelector('.field-error');
+                if (errSpan) errSpan.textContent = 'Veuillez entrer un numéro valide';
             }
 
-            // Email validation
-            if (field.type === 'email' && field.value) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(field.value)) {
-                    isValid = false;
-                    field.classList.add('error');
-                    field.style.borderColor = '#ff6b6b';
-                }
+            if (!fieldValid) {
+                isValid = false;
+                if (!firstError) firstError = field;
             }
+            setFieldError(field, !fieldValid);
         });
 
-        if (!isValid) {
-            showNotification('error', 'Veuillez remplir tous les champs obligatoires.');
+        if (!isValid && firstError) {
+            firstError.focus();
         }
 
         return isValid;
@@ -842,11 +983,19 @@ function initMultiStepForm() {
         });
     });
 
-    // Clear error styling on input
+    // Live inline validation on blur
     form.querySelectorAll('input, select, textarea').forEach(field => {
         field.addEventListener('input', () => {
-            field.classList.remove('error');
-            field.style.borderColor = '';
+            const group = field.closest('.form-group');
+            if (group) group.classList.remove('has-error');
+        });
+
+        field.addEventListener('blur', () => {
+            if (!field.hasAttribute('required') || !field.value.trim()) return;
+            let hasError = false;
+            if (field.type === 'email' && !emailRegex.test(field.value)) hasError = true;
+            if (field.type === 'tel' && !phoneRegex.test(field.value.replace(/\s/g, ''))) hasError = true;
+            setFieldError(field, hasError);
         });
     });
 }

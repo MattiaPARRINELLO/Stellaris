@@ -96,7 +96,7 @@ describe('Tests d\'intégration complets', () => {
 
       app = express();
       app.use(express.json());
-      
+
       // Middleware d'auth simple pour tests
       app.use((req, res, next) => {
         const apiKey = req.headers['x-admin-key'];
@@ -106,7 +106,7 @@ describe('Tests d\'intégration complets', () => {
           res.status(401).json({ error: 'Non autorisé' });
         }
       });
-      
+
       app.use('/api/admin', adminRoutes);
 
       // Tests basiques pour vérifier la structure
@@ -123,12 +123,12 @@ describe('Tests de charge légers', () => {
     const app = express();
     app.use('/api/health', healthRoutes);
 
-    const requests = Array(10).fill(null).map(() => 
+    const requests = Array(10).fill(null).map(() =>
       request(app).get('/api/health')
     );
 
     const responses = await Promise.all(requests);
-    
+
     responses.forEach(response => {
       expect(response.status).toBe(200);
       expect(response.body.status).toBe('ok');

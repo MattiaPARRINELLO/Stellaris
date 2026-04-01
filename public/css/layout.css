@@ -238,9 +238,11 @@
 
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-collumns: 1fr;
   gap: 4rem;
   align-items: center;
+  justify-content: center;
 }
 
 .about h2 {
@@ -326,11 +328,6 @@
   padding: 3rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
-}
-
-.booking-form button {
-  width: 100%;
-  margin-top: 1rem;
 }
 
 /* Contact Section */

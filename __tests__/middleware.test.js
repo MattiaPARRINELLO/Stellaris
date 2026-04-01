@@ -6,7 +6,7 @@ describe('Auth Middleware', () => {
   beforeEach(() => {
     req = {
       headers: {},
-      header: function(name) {
+      header: function (name) {
         return this.headers[name];
       }
     };
@@ -22,7 +22,7 @@ describe('Auth Middleware', () => {
 
   test('devrait appeler next() si clé API valide', () => {
     req.headers['x-admin-key'] = 'test-secret-key';
-    
+
     requireAdmin(req, res, next);
 
     expect(next).toHaveBeenCalled();
@@ -39,7 +39,7 @@ describe('Auth Middleware', () => {
 
   test('devrait retourner 401 si clé API invalide', () => {
     req.headers['x-admin-key'] = 'wrong-key';
-    
+
     requireAdmin(req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(401);
@@ -49,7 +49,7 @@ describe('Auth Middleware', () => {
 
   test('devrait être case-sensitive pour la clé', () => {
     req.headers['x-admin-key'] = 'TEST-SECRET-KEY';
-    
+
     requireAdmin(req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(401);

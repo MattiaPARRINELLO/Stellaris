@@ -75,7 +75,7 @@
         <div class="glass-cta" aria-hidden="false">
           <span class="badge">Offert</span>
           <div class="cta-text">
-            <strong>Audit flash 30 min</strong>
+            <strong>Diagnostique flash 30 min</strong>
             <small>Avec un expert énergie</small>
           </div>
           <a href="#booking" class="btn btn-primary btn-compact">Réserver</a>
@@ -143,23 +143,22 @@
 
           <div class="service-card">
             <div class="service-icon">
-              <i class="fas fa-building"></i>
+              <i class="fa-solid fa-person-digging"></i>
             </div>
-            <h3>Audit Immobilier</h3>
+            <h3>Sans Travaux</h3>
             <p>
-              Évaluation des bâtiments pour optimiser leur efficacité
-              énergétique
+              Solutions d'optimisation sans investissement initial ni travaux
             </p>
           </div>
 
           <div class="service-card">
             <div class="service-icon">
-              <i class="fas fa-cogs"></i>
+              <i class="fas fa-graduation-cap"></i>
             </div>
-            <h3>Suivi & Reporting</h3>
+            <h3>Formation Énergie</h3>
             <p>
-              Tableaux de bord détaillés et suivi continu de vos économies
-              réalisées
+              Formations pratiques pour réduire votre consommation d'électricité
+              et adopter les bons gestes au quotidien
             </p>
           </div>
         </div>
@@ -173,9 +172,6 @@
           <div class="about-text">
             <h2>Pourquoi Stellaris Conseil ?</h2>
             <ul class="benefits">
-              <li>
-                <strong>Expertise confirmée</strong> dans le secteur énergétique
-              </li>
               <li>
                 <strong>Résultats mesurables</strong> et garantis pour vos
                 économies
@@ -193,9 +189,9 @@
               </li>
             </ul>
           </div>
-          <div class="about-stats">
+          <!-- <div class="about-stats">
             <div class="stat">
-              <h3 data-target="500">0</h3>
+              <h3 data-target="0">0</h3>
               <p>Entreprises accompagnées</p>
             </div>
             <div class="stat">
@@ -206,7 +202,7 @@
               <h3 data-target="98">0</h3>
               <p>de satisfaction client</p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
@@ -225,6 +221,7 @@
             <span class="form-progress-dot active" data-step="1"></span>
             <span class="form-progress-dot" data-step="2"></span>
             <span class="form-progress-dot" data-step="3"></span>
+            <span class="form-progress-dot" data-step="4"></span>
           </div>
 
           <!-- Step 1: Contact Info -->
@@ -232,18 +229,25 @@
             <p class="step-title">Vos coordonnées</p>
             <div class="form-group">
               <label for="name">Nom complet *</label>
-              <input type="text" id="name" name="name" required />
+              <input type="text" id="name" name="name" required placeholder="Jean Dupont" />
+              <span class="field-error" data-for="name">Veuillez entrer votre nom</span>
             </div>
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required />
+              <input type="email" id="email" name="email" required placeholder="jean@entreprise.fr" />
+              <span class="field-error" data-for="email">Veuillez entrer un email valide</span>
             </div>
             <div class="form-group">
               <label for="phone">Téléphone *</label>
-              <input type="tel" id="phone" name="phone" required />
+              <input type="tel" id="phone" name="phone" required placeholder="06 12 34 56 78" />
+              <span class="field-error" data-for="phone">Veuillez entrer un numéro de téléphone valide</span>
             </div>
             <div class="form-nav-buttons">
-              <button type="button" class="btn btn-primary btn-next" data-next="2">
+              <button
+                type="button"
+                class="btn btn-primary btn-next"
+                data-next="2"
+              >
                 Suivant <i class="fas fa-arrow-right"></i>
               </button>
             </div>
@@ -254,7 +258,8 @@
             <p class="step-title">Votre entreprise</p>
             <div class="form-group">
               <label for="company">Nom entreprise *</label>
-              <input type="text" id="company" name="company" required />
+              <input type="text" id="company" name="company" required placeholder="Mon Entreprise SAS" />
+              <span class="field-error" data-for="company">Veuillez entrer le nom de votre entreprise</span>
             </div>
             <div class="form-group">
               <label for="sector">Secteur d'activité *</label>
@@ -278,48 +283,82 @@
               ></textarea>
             </div>
             <div class="form-nav-buttons">
-              <button type="button" class="btn btn-secondary btn-prev" data-prev="1">
+              <button
+                type="button"
+                class="btn btn-secondary btn-prev"
+                data-prev="1"
+              >
                 <i class="fas fa-arrow-left"></i> Retour
               </button>
-              <button type="button" class="btn btn-primary btn-next" data-next="3">
+              <button
+                type="button"
+                class="btn btn-primary btn-next"
+                data-next="3"
+              >
                 Suivant <i class="fas fa-arrow-right"></i>
               </button>
             </div>
           </div>
 
-          <!-- Step 3: Slot Selection + Confirmation -->
+          <!-- Step 3: Slot Selection -->
           <div class="form-step" data-step="3">
             <p class="step-title">Choisir un créneau</p>
-            
-            <!-- Sélection de créneau depuis le backend (si disponible) -->
-            <div class="form-group" id="slotPicker" style="display: none">
-              <label for="slotSelect">Créneau disponible *</label>
-              <select id="slotSelect" name="slot">
-                <option value="">Chargement des créneaux...</option>
-              </select>
-              <div style="margin-top: 0.75rem;">
-                <button type="button" id="btnNextSlot" class="btn btn-secondary" style="width: 100%;">
-                  <i class="fas fa-clock"></i> Proposer le plus proche
-                </button>
+
+            <!-- Visual date picker -->
+            <div class="form-group" id="slotPicker">
+              <div id="datePicker" class="date-picker">
+                <div class="date-picker-header">
+                  <button type="button" id="datePrevWeek" class="date-nav-btn" aria-label="Semaine precedente" title="Semaine precedente"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                  <span id="datePickerLabel" class="date-picker-label">Chargement...</span>
+                  <button type="button" id="dateNextWeek" class="date-nav-btn" aria-label="Semaine suivante" title="Semaine suivante"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+                <div id="datePickerDays" class="date-picker-days"></div>
               </div>
-              <small id="slotHelp" style="opacity: 0.7; display: block; margin-top: 0.5rem; text-align: center;">
+
+              <!-- Time slot buttons -->
+              <div id="timeSlots" class="time-slots">
+                <p class="time-slots-placeholder">Sélectionnez une date pour voir les horaires</p>
+              </div>
+
+              <small id="slotHelp" style="opacity:0.7;display:block;margin-top:0.5rem;text-align:center;">
                 Les créneaux sont mis à jour en temps réel
               </small>
-            </div>
-
-            <div class="form-group checkbox">
-              <input type="checkbox" id="terms" name="terms" required />
-              <label for="terms">
-                J'accepte les conditions d'utilisation et la politique de confidentialité *
-              </label>
+              <!-- Hidden select to store selected value (backward compat) -->
+              <select id="slotSelect" name="slot" style="display:none"></select>
             </div>
 
             <div class="form-nav-buttons">
               <button type="button" class="btn btn-secondary btn-prev" data-prev="2">
                 <i class="fas fa-arrow-left"></i> Retour
               </button>
+              <button type="button" class="btn btn-primary btn-next" data-next="4">
+                Suivant <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 4: Recap + Confirmation -->
+          <div class="form-step" data-step="4">
+            <p class="step-title">Récapitulatif</p>
+
+            <div id="bookingRecap" class="booking-recap">
+              <!-- Filled dynamically -->
+            </div>
+
+            <div class="form-group checkbox">
+              <input type="checkbox" id="terms" name="terms" required />
+              <label for="terms">
+                J'accepte les conditions d'utilisation et la politique de
+                confidentialité *
+              </label>
+            </div>
+
+            <div class="form-nav-buttons">
+              <button type="button" class="btn btn-secondary btn-prev" data-prev="3">
+                <i class="fas fa-arrow-left"></i> Retour
+              </button>
               <button type="submit" class="btn btn-primary btn-large">
-                <i class="fas fa-check"></i> Confirmer
+                <i class="fas fa-check"></i> Confirmer le rendez-vous
               </button>
             </div>
           </div>
@@ -350,13 +389,13 @@
               <p>contact@stellarisconseil.fr</p>
             </div>
           </div>
-          <div class="contact-item">
+          <!-- <div class="contact-item">
             <i class="fas fa-map-marker-alt"></i>
             <div>
               <h4>Adresse</h4>
               <p>75 Rue de la Paix, 75000 Paris</p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
@@ -404,7 +443,10 @@
           </a>
         </li>
         <li>
-          <button class="bottom-nav-item theme-toggle-mobile" aria-label="Changer de thème">
+          <button
+            class="bottom-nav-item theme-toggle-mobile"
+            aria-label="Changer de thème"
+          >
             <i class="fas fa-sun icon-sun"></i>
             <i class="fas fa-moon icon-moon"></i>
             <span>Thème</span>

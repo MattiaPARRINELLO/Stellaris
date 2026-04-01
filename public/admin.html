@@ -461,6 +461,78 @@
           grid-template-columns: 1fr;
         }
       }
+      /* Filter tabs */
+      .filter-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        background: var(--bg-card);
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .filter-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .filter-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .filter-badge {
+        background: #ff6b6b;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.1rem 0.45rem;
+        border-radius: 10px;
+        min-width: 18px;
+        text-align: center;
+      }
+      .filter-btn.active .filter-badge {
+        background: rgba(255,255,255,0.3);
+      }
+      .nav-badge {
+        background: #ff6b6b;
+        color: #fff;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 0.1rem 0.4rem;
+        border-radius: 10px;
+        min-width: 16px;
+        text-align: center;
+        margin-left: 0.3rem;
+      }
+      /* Booking status badges in table */
+      .status-label {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+      .status-label.pending {
+        background: rgba(255, 193, 7, 0.15);
+        color: #f59e0b;
+      }
+      .status-label.confirmed {
+        background: rgba(0, 255, 136, 0.12);
+        color: var(--primary);
+      }
+      .status-label.rejected {
+        background: rgba(255, 107, 107, 0.12);
+        color: #ff6b6b;
+      }
+      .status-label.cancelled {
+        background: rgba(150, 150, 150, 0.12);
+        color: var(--text-secondary);
+      }
     </style>
   </head>
   <body>
@@ -530,7 +602,7 @@
             >📊 Vue d'ensemble</a
           >
           <a class="admin-nav-item" data-section="planning">📅 Planning</a>
-          <a class="admin-nav-item" data-section="bookings">📋 Réservations</a>
+          <a class="admin-nav-item" data-section="bookings">📋 Réservations <span id="navPendingBadge" class="nav-badge" style="display:none">0</span></a>
           <a class="admin-nav-item" data-section="slots">⏰ Créneaux</a>
           <a class="admin-nav-item" data-section="settings">⚙️ Paramètres</a>
         </nav>
@@ -644,15 +716,24 @@
         <!-- Bookings Tab -->
         <div id="bookings" class="tab-panel">
           <h1 style="margin-bottom: 0.5rem">Réservations</h1>
-          <p style="color: var(--gray-text); margin-bottom: 1.5rem">
+          <p style="color: var(--gray-text); margin-bottom: 1rem">
             Consultez et gérez les réservations clients.
           </p>
+
+          <!-- Status filter tabs -->
+          <div class="booking-filters" style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+            <button class="filter-btn active" data-filter="all">Toutes</button>
+            <button class="filter-btn" data-filter="pending">En attente <span id="pendingBadge" class="filter-badge" style="display:none">0</span></button>
+            <button class="filter-btn" data-filter="confirmed">Confirmées</button>
+            <button class="filter-btn" data-filter="rejected">Refusées</button>
+            <button class="filter-btn" data-filter="cancelled">Annulées</button>
+          </div>
 
           <div class="search-bar">
             <input
               id="searchBooking"
               type="text"
-              placeholder="Chercher par nom, email..."
+              placeholder="Chercher par nom, email, société..."
             />
             <button id="btnDownloadBookings">📥 Télécharger JSON</button>
           </div>
@@ -771,6 +852,14 @@
                   min="1"
                   max="10"
                   value="1"
+                />
+              </div>
+              <div class="input-group" style="grid-column: 1 / -1">
+                <label>Email admin de notification</label>
+                <input
+                  id="settingAdminNotifyEmail"
+                  type="email"
+                  placeholder="admin@entreprise.fr"
                 />
               </div>
             </div>

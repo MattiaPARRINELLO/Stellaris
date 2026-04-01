@@ -31,6 +31,7 @@ async function ensureDataFiles() {
             timezone: 'Europe/Paris',
             slotDurationMinutes: 30,
             maxBookingsPerSlot: 1,
+            adminNotifyEmail: process.env.ADMIN_NOTIFY_EMAIL || '',
             days: {
                 mon: [{ start: '09:00', end: '18:00' }],
                 tue: [{ start: '09:00', end: '18:00' }],

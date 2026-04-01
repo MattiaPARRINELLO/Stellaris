@@ -1,6 +1,8 @@
 const { DateTime, Interval } = require('luxon');
 const { MIN_NOTICE_HOURS } = require('../config');
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function dayKeyFromWeekday(weekday) {
     const map = { 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thu', 5: 'fri', 6: 'sat', 7: 'sun' };
     return map[weekday];
@@ -8,7 +10,7 @@ function dayKeyFromWeekday(weekday) {
 
 function validateSchedule(payload) {
     if (!payload || typeof payload !== 'object') return 'payload invalide';
-    const { timezone, slotDurationMinutes, maxBookingsPerSlot, days, exceptions } = payload;
+    const { timezone, slotDurationMinutes, maxBookingsPerSlot, days, exceptions, adminNotifyEmail } = payload;
     if (!timezone || typeof timezone !== 'string') return 'timezone manquante';
     if (!slotDurationMinutes || slotDurationMinutes <= 0) return 'slotDurationMinutes invalide';
     if (!maxBookingsPerSlot || maxBookingsPerSlot <= 0) return 'maxBookingsPerSlot invalide';
@@ -21,6 +23,11 @@ function validateSchedule(payload) {
         }
     }
     if (exceptions && typeof exceptions !== 'object') return 'exceptions invalide';
+    if (adminNotifyEmail !== undefined && adminNotifyEmail !== null && adminNotifyEmail !== '') {
+        if (typeof adminNotifyEmail !== 'string' || !EMAIL_REGEX.test(adminNotifyEmail.trim())) {
+            return 'adminNotifyEmail invalide';
+        }
+    }
     return null;
 }
 

@@ -2,7 +2,7 @@
 const initTheme = () => {
     const savedTheme = localStorage.getItem('stellaris-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
+
     // Priority: saved preference > system preference > light
     const theme = savedTheme || (prefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
@@ -12,10 +12,10 @@ const initTheme = () => {
 const toggleTheme = () => {
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
+
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('stellaris-theme', newTheme);
-    
+
     return newTheme;
 };
 
@@ -47,15 +47,15 @@ window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const heroVisual = document.querySelector('.hero-visual');
             const orbs = document.querySelectorAll('.orb');
-            
+
             if (heroVisual && scrolled < window.innerHeight) {
                 heroVisual.style.transform = `translateY(${scrolled * 0.3}px)`;
             }
-            
+
             orbs.forEach((orb, index) => {
                 orb.style.transform = `translate(${Math.sin(scrolled * 0.001 + index) * 20}px, ${scrolled * (0.1 + index * 0.05)}px)`;
             });
-            
+
             // Update scroll progress bar
             const bar = document.querySelector('.scroll-progress-bar');
             if (bar) {
@@ -317,13 +317,13 @@ function showNotification(type, message) {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
-    
+
     // Get computed CSS variables for theme-aware colors
     const styles = getComputedStyle(document.documentElement);
     const primary = styles.getPropertyValue('--primary').trim();
     const secondary = styles.getPropertyValue('--secondary').trim();
     const shadowGlow = styles.getPropertyValue('--shadow-glow').trim();
-    
+
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -530,7 +530,7 @@ document.querySelectorAll('input, select, textarea').forEach(input => {
 
 // Premium card tilt effect on hover
 document.querySelectorAll('.service-card, .liquid-glass').forEach(card => {
-    card.addEventListener('mousemove', function(e) {
+    card.addEventListener('mousemove', function (e) {
         const rect = this.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -538,12 +538,12 @@ document.querySelectorAll('.service-card, .liquid-glass').forEach(card => {
         const centerY = rect.height / 2;
         const rotateX = (y - centerY) / 20;
         const rotateY = (centerX - x) / 20;
-        
+
         this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
         this.style.boxShadow = `${(x - centerX) / 10}px ${(y - centerY) / 10}px 30px rgba(0, 255, 136, 0.3)`;
     });
-    
-    card.addEventListener('mouseleave', function() {
+
+    card.addEventListener('mouseleave', function () {
         this.style.transform = '';
         this.style.boxShadow = '';
     });
@@ -589,15 +589,15 @@ document.querySelectorAll('.btn').forEach(button => {
         this.style.transform = '';
         this.style.boxShadow = '';
     });
-    
+
     // Ripple effect on click
-    button.addEventListener('click', function(e) {
+    button.addEventListener('click', function (e) {
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
-        
+
         ripple.style.cssText = `
             position: absolute;
             width: ${size}px;
@@ -609,11 +609,11 @@ document.querySelectorAll('.btn').forEach(button => {
             animation: ripple 0.6s ease-out;
             pointer-events: none;
         `;
-        
+
         this.style.position = 'relative';
         this.style.overflow = 'hidden';
         this.appendChild(ripple);
-        
+
         setTimeout(() => ripple.remove(), 600);
     });
 });

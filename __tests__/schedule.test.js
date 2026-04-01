@@ -6,7 +6,7 @@ describe('Schedule Service', () => {
     test('devrait générer des créneaux pour une plage donnée', () => {
       const now = DateTime.now();
       const range = Interval.fromDateTimes(now, now.plus({ days: 7 }));
-      
+
       const schedule = {
         timezone: 'Europe/Paris',
         slotDurationMinutes: 60,
@@ -26,7 +26,7 @@ describe('Schedule Service', () => {
       const slots = generateSlots(range, schedule);
 
       expect(Array.isArray(slots)).toBe(true);
-      
+
       // Vérifier structure des créneaux
       if (slots.length > 0) {
         slots.forEach(slot => {
@@ -41,7 +41,7 @@ describe('Schedule Service', () => {
     test('ne devrait pas générer de créneaux si aucun jour actif', () => {
       const now = DateTime.now();
       const range = Interval.fromDateTimes(now, now.plus({ days: 7 }));
-      
+
       const schedule = {
         timezone: 'Europe/Paris',
         slotDurationMinutes: 60,
@@ -67,7 +67,7 @@ describe('Schedule Service', () => {
     test('devrait grouper les créneaux par jour', () => {
       const now = DateTime.now();
       const tomorrow = now.plus({ days: 1 });
-      
+
       const slots = [
         { id: '1', start: now.toISO(), end: now.plus({ hours: 1 }).toISO(), duration: 60 },
         { id: '2', start: now.plus({ hours: 2 }).toISO(), end: now.plus({ hours: 3 }).toISO(), duration: 60 },
