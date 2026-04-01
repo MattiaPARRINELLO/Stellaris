@@ -388,6 +388,40 @@
       .btn-confirm:hover {
         background: #ff5252;
       }
+      /* Email compose modal */
+      .email-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      .email-modal.active { display: flex; }
+      .email-modal .modal-card {
+        width: 100%;
+        max-width: 720px;
+        background: var(--darker-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.25rem;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      }
+      .email-modal label { display:block; font-weight:600; margin-top:0.5rem; color:var(--light-text); }
+      .email-modal input, .email-modal textarea {
+        width:100%;
+        padding:0.6rem 0.8rem;
+        border-radius:8px;
+        border:1px solid var(--admin-input-border);
+        background:var(--admin-input-bg);
+        color:var(--text-primary);
+        margin-top:0.25rem;
+        font-size:0.95rem;
+      }
+      .email-modal textarea { min-height:160px; resize:vertical; }
+      .email-modal .modal-actions { display:flex; gap:0.5rem; margin-top:0.75rem; }
       .search-bar {
         display: flex;
         gap: 0.5rem;
@@ -914,6 +948,28 @@
             Annuler
           </button>
           <button class="btn-confirm" id="btnConfirmAction">Confirmer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email Compose Modal -->
+    <div id="emailModal" class="email-modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="emailModalTitle">
+        <h3 id="emailModalTitle" style="margin:0 0 0.5rem; color:var(--primary)">Envoyer un e-mail</h3>
+        <div>
+          <label for="emailRecipient">Destinataire</label>
+          <input id="emailRecipient" type="email" readonly />
+
+          <label for="emailSubject">Sujet</label>
+          <input id="emailSubject" type="text" />
+
+          <label for="emailMessage">Message</label>
+          <textarea id="emailMessage"></textarea>
+
+          <div class="modal-actions">
+            <button id="btnCancelEmail" class="btn btn-cancel">Annuler</button>
+            <button id="btnSendEmail" class="btn btn-primary">Envoyer</button>
+          </div>
         </div>
       </div>
     </div>

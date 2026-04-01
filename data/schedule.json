@@ -2,13 +2,38 @@
   "timezone": "Europe/Paris",
   "slotDurationMinutes": 30,
   "maxBookingsPerSlot": 1,
-  "adminNotifyEmail": "",
+  "adminNotifyEmail": "biboune.mattia@gmail.com",
   "days": {
-    "mon": [{ "start": "09:00", "end": "18:00" }],
-    "tue": [{ "start": "09:00", "end": "18:00" }],
-    "wed": [{ "start": "09:00", "end": "18:00" }],
-    "thu": [{ "start": "09:00", "end": "18:00" }],
-    "fri": [{ "start": "09:00", "end": "18:00" }],
+    "mon": [
+      {
+        "start": "09:00",
+        "end": "18:00"
+      }
+    ],
+    "tue": [
+      {
+        "start": "09:00",
+        "end": "18:00"
+      }
+    ],
+    "wed": [
+      {
+        "start": "09:00",
+        "end": "18:00"
+      }
+    ],
+    "thu": [
+      {
+        "start": "09:00",
+        "end": "18:00"
+      }
+    ],
+    "fri": [
+      {
+        "start": "09:00",
+        "end": "18:00"
+      }
+    ],
     "sat": [],
     "sun": []
   },

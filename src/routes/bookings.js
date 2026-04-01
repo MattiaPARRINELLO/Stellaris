@@ -7,6 +7,7 @@ const { readJson, writeJson } = require('../utils/json');
 const { logInfo, logError } = require('../utils/logger');
 const { generateSlots } = require('../services/schedule');
 const { sendMail } = require('../services/mail');
+const { adminNotificationHtml, clientConfirmationHtml } = require('../services/mailTemplates');
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^[\d\s\+\-\(\)\.]{7,20}$/;
@@ -70,7 +71,7 @@ router.post('/', async (req, res) => {
         const slotLabel = tf.format(startDT.toJSDate());
         const adminRecipients = getAdminRecipients(schedule);
         if (adminRecipients.length > 0) {
-            const body = [
+            const plain = [
                 'Nouvelle demande de créneau',
                 '',
                 `Nom : ${name}`,
@@ -82,25 +83,24 @@ router.post('/', async (req, res) => {
                 '',
                 'Merci de confirmer ce créneau dans l\'admin.'
             ].join('\n');
+            const html = adminNotificationHtml(booking, slotLabel);
             for (const recipient of adminRecipients) {
-                sendMail({ to: recipient, subject: 'Nouvelle demande de créneau', text: body });
+                sendMail({ to: recipient, subject: 'Nouvelle demande de créneau', text: plain, html });
             }
         }
 
-        sendMail({
-            to: email,
-            subject: 'Votre demande de rendez-vous a bien été reçue',
-            text: [
-                'Bonjour,',
-                '',
-                'Nous avons bien reçu votre demande de rendez-vous.',
-                `Créneau demandé : ${slotLabel}`,
-                '',
-                'Notre équipe va vérifier la disponibilité et vous enverra une confirmation rapidement.',
-                '',
-                'Stellaris Conseil'
-            ].join('\n')
-        });
+        const clientPlain = [
+            'Bonjour,',
+            '',
+            'Nous avons bien reçu votre demande de rendez-vous.',
+            `Créneau demandé : ${slotLabel}`,
+            '',
+            'Notre équipe va vérifier la disponibilité et vous enverra une confirmation rapidement.',
+            '',
+            'Stellaris Conseil'
+        ].join('\n');
+        const clientHtml = clientConfirmationHtml(booking, slotLabel);
+        sendMail({ to: email, subject: 'Votre demande de rendez-vous a bien été reçue', text: clientPlain, html: clientHtml });
 
         logInfo('public booking created', booking.id);
         res.status(201).json({ booking: { id: booking.id, cancelToken: booking.cancelToken, status: booking.status, slotStart: booking.slotStart, slotEnd: booking.slotEnd } });

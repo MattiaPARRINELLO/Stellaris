@@ -13,6 +13,7 @@ let isAuthenticated = false;
 let authTimeout = null;
 let confirmCallback = null;
 let currentFilter = 'all';
+let currentEmailBooking = null;
 
 const DAYS_FR = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
 const MIN_KEY_LENGTH = 4;
@@ -594,43 +595,84 @@ function getEmailDraftForBooking(booking) {
     };
 }
 
-async function sendBookingEmail(booking) {
-    if (!isAuthenticated) {
-        showAlert('error', 'Veuillez vous authentifier');
-        return;
-    }
+function openEmailModal(booking) {
+    currentEmailBooking = booking || null;
+    const recipientInput = document.getElementById('emailRecipient');
+    const subjectInput = document.getElementById('emailSubject');
+    const messageInput = document.getElementById('emailMessage');
+    if (!recipientInput || !subjectInput || !messageInput) return;
     const recipient = String(booking?.email || '').trim();
     if (!EMAIL_REGEX.test(recipient)) {
         showAlert('error', 'Adresse email client invalide');
         return;
     }
-
     const draft = getEmailDraftForBooking(booking);
-    const subject = window.prompt(`Sujet du mail pour ${recipient}`, draft.subject);
-    if (subject === null) return;
-    const message = window.prompt('Message du mail', draft.message);
-    if (message === null) return;
-    if (!subject.trim() || !message.trim()) {
-        showAlert('error', 'Sujet et message sont requis');
-        return;
+    recipientInput.value = recipient;
+    subjectInput.value = draft.subject || '';
+    messageInput.value = draft.message || '';
+    const modal = document.getElementById('emailModal');
+    if (modal) {
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
     }
+    setTimeout(() => subjectInput.focus(), 120);
+}
 
-    confirmAction('Envoyer ce mail ?', `Le message sera envoyé à ${recipient}.`, async () => {
+function closeEmailModal() {
+    currentEmailBooking = null;
+    const recipientInput = document.getElementById('emailRecipient');
+    const subjectInput = document.getElementById('emailSubject');
+    const messageInput = document.getElementById('emailMessage');
+    if (recipientInput) recipientInput.value = '';
+    if (subjectInput) subjectInput.value = '';
+    if (messageInput) messageInput.value = '';
+    const modal = document.getElementById('emailModal');
+    if (modal) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+}
+
+async function sendBookingEmail(booking) {
+    // Backwards-compatible entry point used by renderBindings: open modal
+    openEmailModal(booking);
+}
+
+// Handler for the modal Send button
+document.addEventListener('click', async (e) => {
+    if (e.target && e.target.id === 'btnCancelEmail') {
+        e.preventDefault();
+        closeEmailModal();
+    }
+    if (e.target && e.target.id === 'btnSendEmail') {
+        e.preventDefault();
+        if (!isAuthenticated) { showAlert('error', 'Veuillez vous authentifier'); return; }
+        const subject = (document.getElementById('emailSubject')?.value || '').trim();
+        const message = (document.getElementById('emailMessage')?.value || '').trim();
+        const recipient = (document.getElementById('emailRecipient')?.value || '').trim();
+        if (!recipient || !EMAIL_REGEX.test(recipient)) { showAlert('error', 'Destinataire invalide'); return; }
+        if (!subject) { showAlert('error', 'Sujet requis'); return; }
+        if (!message) { showAlert('error', 'Message requis'); return; }
+        if (!currentEmailBooking || !currentEmailBooking.id) { showAlert('error', 'Réservation invalide'); closeEmailModal(); return; }
+
         try {
-            const res = await adminFetch(`/api/admin/bookings/${booking.id}/send-email`, {
+            const payload = { subject, message };
+            const res = await adminFetch(`/api/admin/bookings/${currentEmailBooking.id}/send-email`, {
                 method: 'POST',
-                body: JSON.stringify({ subject: subject.trim(), message: message.trim() })
+                body: JSON.stringify(payload)
             });
             if (!res.ok) {
                 const err = await res.json().catch(() => ({}));
                 throw new Error(err.error || 'send_email_failed');
             }
-            showAlert('success', 'Email envoyé au client');
-        } catch (e) {
+            showAlert('success', 'Email envoyé');
+            closeEmailModal();
+        } catch (err) {
+            console.error('[admin] sendEmail error', err);
             showAlert('error', 'Impossible d\'envoyer le mail');
         }
-    });
-}
+    }
+});
 
 function confirmAction(title, message, callback) {
     console.log('[admin] confirmAction called', title);

@@ -56,5 +56,35 @@
     "confirmedAt": null,
     "rejectedAt": "2026-04-01T10:36:15.870+02:00",
     "rejectionReason": "Indispo"
+  },
+  {
+    "id": "99fbf073-cd48-446e-8baa-5a724a8dfb22",
+    "cancelToken": "086e4358-1ac7-4421-b3ac-c44fdb46d457",
+    "name": "Mattia PARRINELLO",
+    "email": "contactperso.mp@gmail.com",
+    "company": ";,nbvcxw",
+    "phone": "0650586251",
+    "sector": "retail",
+    "description": null,
+    "slotStart": "2026-04-02T12:30:00.000+02:00",
+    "slotEnd": "2026-04-02T13:00:00.000+02:00",
+    "createdAt": "2026-04-01T11:44:18.183+02:00",
+    "status": "pending",
+    "confirmedAt": null
+  },
+  {
+    "id": "361ea87a-0705-40b2-b37a-2393113adf4d",
+    "cancelToken": "15d7b698-9507-4c3b-8bad-59977344cc49",
+    "name": "Mattia PARRINELLO",
+    "email": "contactperso.mp@gmail.com",
+    "company": "dssdfds",
+    "phone": "0650586251",
+    "sector": "retail",
+    "description": null,
+    "slotStart": "2026-04-02T13:00:00.000+02:00",
+    "slotEnd": "2026-04-02T13:30:00.000+02:00",
+    "createdAt": "2026-04-01T11:56:11.206+02:00",
+    "status": "pending",
+    "confirmedAt": null
   }
 ]

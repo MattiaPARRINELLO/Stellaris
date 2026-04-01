@@ -7,6 +7,7 @@ const { readJson, writeJson } = require('../utils/json');
 const { logInfo, logError, logDebug } = require('../utils/logger');
 const { validateSchedule, generateSlots, groupSlotsByDay } = require('../services/schedule');
 const { sendMail } = require('../services/mail');
+const { adminNotificationHtml, bookingConfirmedHtml, genericWrappedMessageHtml } = require('../services/mailTemplates');
 const { requireAdmin } = require('../middleware/auth');
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -136,15 +137,17 @@ router.post('/bookings/:id/confirm', async (req, res) => {
 
         if (booking.email) {
             const tf = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' });
-            const body = [
+            const slotLabel = tf.format(new Date(booking.slotStart));
+            const plain = [
                 'Votre rendez-vous est confirmé !',
                 '',
-                `Créneau : ${tf.format(new Date(booking.slotStart))}`,
+                `Créneau : ${slotLabel}`,
                 `Secteur : ${booking.sector}`,
                 '',
                 'Merci et à bientôt.'
             ].join('\n');
-            sendMail({ to: booking.email, subject: 'Confirmation de votre rendez-vous', text: body });
+            const html = bookingConfirmedHtml(booking, slotLabel);
+            sendMail({ to: booking.email, subject: 'Confirmation de votre rendez-vous', text: plain, html });
         }
 
         logInfo('admin confirmed', booking.id);
@@ -173,15 +176,17 @@ router.post('/bookings/:id/reject', async (req, res) => {
 
         if (booking.email) {
             const tf = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' });
-            const body = [
+            const slotLabel = tf.format(new Date(booking.slotStart));
+            const parts = [
                 'Votre demande de rendez-vous a été refusée',
                 '',
-                `Créneau demandé : ${tf.format(new Date(booking.slotStart))}`,
-                reason ? `Motif : ${reason}` : null,
-                '',
-                'Vous pouvez sélectionner un autre créneau depuis la page de réservation.'
-            ].filter(Boolean).join('\n');
-            sendMail({ to: booking.email, subject: 'Refus de votre demande de rendez-vous', text: body });
+                `Créneau demandé : ${slotLabel}`
+            ];
+            if (reason) parts.push(`Motif : ${reason}`);
+            parts.push('', 'Vous pouvez sélectionner un autre créneau depuis la page de réservation.');
+            const plain = parts.join('\n');
+            const html = genericWrappedMessageHtml('Refus de votre demande de rendez-vous', plain);
+            sendMail({ to: booking.email, subject: 'Refus de votre demande de rendez-vous', text: plain, html });
         }
 
         res.json({ booking });
@@ -205,11 +210,8 @@ router.post('/bookings/:id/send-email', async (req, res) => {
         const recipient = typeof booking.email === 'string' ? booking.email.trim() : '';
         if (!EMAIL_REGEX.test(recipient)) return res.status(400).json({ error: 'invalid_booking_email' });
 
-        await sendMail({
-            to: recipient,
-            subject,
-            text: message
-        });
+        const html = genericWrappedMessageHtml(subject, message);
+        await sendMail({ to: recipient, subject, text: message, html });
 
         logInfo('admin manual email sent', { bookingId: booking.id, to: recipient });
         res.json({ ok: true });
@@ -255,15 +257,17 @@ router.post('/bookings', async (req, res) => {
 
         if (email) {
             const tf = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' });
-            const body = [
+            const slotLabel = tf.format(startDT.toJSDate());
+            const plain = [
                 'Votre rendez-vous est confirmé (ajout par l\'administrateur).',
                 '',
-                `Créneau : ${tf.format(startDT.toJSDate())}`,
+                `Créneau : ${slotLabel}`,
                 `Secteur : ${sector}`,
                 '',
                 'Merci et à bientôt.'
             ].join('\n');
-            sendMail({ to: email, subject: 'Confirmation de votre rendez-vous', text: body });
+            const html = bookingConfirmedHtml(booking, slotLabel);
+            sendMail({ to: email, subject: 'Confirmation de votre rendez-vous', text: plain, html });
         }
 
         res.status(201).json({ booking });
