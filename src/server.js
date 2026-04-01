@@ -16,6 +16,16 @@ const adminRoutes = require('./routes/admin');
 
 const app = express();
 
+// SEO: Compression gzip pour améliorer les performances
+let compression;
+try {
+    compression = require('compression');
+    app.use(compression());
+    logInfo('SEO: Compression gzip activée');
+} catch (_) {
+    logInfo('SEO: Module compression non installé — npm install compression pour activer la compression gzip');
+}
+
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
@@ -56,8 +66,65 @@ app.use('/api/slots', slotsRoutes);
 app.use('/api/bookings', bookingsRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Serve static files (front)
-app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
+// SEO: Sitemap.xml dynamique
+app.get('/sitemap.xml', (_req, res) => {
+    const baseUrl = 'https://stellarisconseil.fr';
+    const lastmod = new Date().toISOString().split('T')[0];
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}/</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/#services</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/#about</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/#booking</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/#contact</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>`;
+    res.set('Content-Type', 'application/xml');
+    res.set('Cache-Control', 'public, max-age=86400'); // cache 1 jour
+    res.send(xml);
+});
+
+// SEO: Serve static files avec headers de cache optimisés
+app.use(express.static(PUBLIC_DIR, {
+    extensions: ['html'],
+    maxAge: '7d',            // SEO: cache assets statiques 7 jours
+    etag: true,              // SEO: ETags pour validation cache
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+        // SEO: cache plus long pour les assets immutables
+        if (filePath.endsWith('.css') || filePath.endsWith('.js')) {
+            res.set('Cache-Control', 'public, max-age=604800'); // 7 jours
+        } else if (filePath.match(/\.(svg|png|jpg|jpeg|gif|webp|ico)$/)) {
+            res.set('Cache-Control', 'public, max-age=2592000'); // 30 jours
+        } else if (filePath.endsWith('.html')) {
+            res.set('Cache-Control', 'public, max-age=3600'); // 1 heure pour le HTML
+        }
+    }
+}));
 
 // Fallback to index.html for root
 app.get('/', (_req, res) => {

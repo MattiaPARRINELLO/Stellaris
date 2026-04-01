@@ -1,0 +1,7 @@
+# SEO: Robots.txt pour stellarisconseil.fr
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://stellarisconseil.fr/sitemap.xml

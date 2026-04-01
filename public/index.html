@@ -3,18 +3,291 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stellaris Conseil - Optimisation Énergétique</title>
+    <!-- SEO: Title optimisé avec mots-clés principaux -->
+    <title>
+      Stellaris Conseil — Optimisation Énergétique pour Entreprises | Audit &
+      Réduction des Coûts
+    </title>
+    <!-- SEO: Meta description optimisée pour le CTR -->
+    <meta
+      name="description"
+      content="Stellaris Conseil accompagne les entreprises dans l'optimisation de leur consommation énergétique. Audit énergétique, réduction des coûts jusqu'à 30%, conseil stratégique et transition énergétique. Consultation gratuite de 30 min."
+    />
+    <!-- SEO: Meta keywords (faible impact mais signal complémentaire) -->
+    <meta
+      name="keywords"
+      content="optimisation énergétique entreprise, audit énergétique professionnel, réduction consommation énergie, conseil énergie France, transition énergétique entreprise, consultant énergie, facture énergétique, économies énergie"
+    />
+    <!-- SEO: Canonical URL -->
+    <link rel="canonical" href="https://stellarisconseil.fr/" />
+    <!-- SEO: Open Graph pour partage réseaux sociaux -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Stellaris Conseil" />
+    <meta
+      property="og:title"
+      content="Stellaris Conseil — Optimisation Énergétique pour Entreprises"
+    />
+    <meta
+      property="og:description"
+      content="Audit énergétique, réduction des coûts jusqu'à 30%, conseil stratégique. Consultation gratuite de 30 min avec un expert énergie."
+    />
+    <meta property="og:url" content="https://stellarisconseil.fr/" />
+    <meta
+      property="og:image"
+      content="https://stellarisconseil.fr/assets/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Stellaris Conseil - Expert en optimisation énergétique pour entreprises"
+    />
+    <!-- SEO: Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Stellaris Conseil — Optimisation Énergétique pour Entreprises"
+    />
+    <meta
+      name="twitter:description"
+      content="Audit énergétique, réduction des coûts jusqu'à 30%, conseil stratégique. Consultation gratuite de 30 min."
+    />
+    <meta
+      name="twitter:image"
+      content="https://stellarisconseil.fr/assets/og-image.png"
+    />
+    <!-- SEO: Favicon et icônes -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logoNoBg.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon.png"
+    />
+    <!-- SEO: Robots -->
+    <meta name="robots" content="index, follow" />
+    <!-- SEO: Thème couleur mobile -->
+    <meta name="theme-color" content="#00a86b" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/mobile.css" />
+    <!-- SEO: Font Awesome chargé de façon non bloquante -->
     <link
-      rel="stylesheet"
+      rel="preload"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    /></noscript>
   </head>
   <body>
+    <!-- SEO: Schema.org JSON-LD — Organisation / LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://stellarisconseil.fr/#organization",
+        "name": "Stellaris Conseil",
+        "description": "Cabinet de conseil en optimisation énergétique pour entreprises. Audit, réduction des coûts, transition énergétique et formation.",
+        "url": "https://stellarisconseil.fr",
+        "logo": "https://stellarisconseil.fr/assets/logo.svg",
+        "image": "https://stellarisconseil.fr/assets/og-image.png",
+        "telephone": "+33610304 34",
+        "email": "l.stellarisconseil@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Paris",
+          "addressRegion": "Île-de-France",
+          "addressCountry": "FR"
+        },
+        "areaServed": [
+          { "@type": "Country", "name": "France" },
+          { "@type": "AdministrativeArea", "name": "Île-de-France" },
+          { "@type": "AdministrativeArea", "name": "Auvergne-Rhône-Alpes" },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Provence-Alpes-Côte d'Azur"
+          }
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        ],
+        "priceRange": "€€",
+        "sameAs": []
+      }
+    </script>
+    <!-- SEO: Schema.org JSON-LD — Services -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Services Stellaris Conseil",
+        "itemListElement": [
+          {
+            "@type": "Service",
+            "position": 1,
+            "name": "Diagnostic Énergétique",
+            "description": "Analyse complète de la consommation énergétique de votre entreprise et identification des économies potentielles. Bilan détaillé avec recommandations personnalisées.",
+            "provider": { "@id": "https://stellarisconseil.fr/#organization" },
+            "areaServed": { "@type": "Country", "name": "France" }
+          },
+          {
+            "@type": "Service",
+            "position": 2,
+            "name": "Optimisation des Coûts Énergétiques",
+            "description": "Stratégies personnalisées pour réduire votre facture énergétique jusqu'à 30%. Analyse tarifaire, optimisation des contrats et suivi des performances.",
+            "provider": { "@id": "https://stellarisconseil.fr/#organization" },
+            "areaServed": { "@type": "Country", "name": "France" }
+          },
+          {
+            "@type": "Service",
+            "position": 3,
+            "name": "Transition Énergétique",
+            "description": "Accompagnement vers des solutions éco-responsables et durables. Étude de faisabilité, choix technologiques et pilotage de projet.",
+            "provider": { "@id": "https://stellarisconseil.fr/#organization" },
+            "areaServed": { "@type": "Country", "name": "France" }
+          },
+          {
+            "@type": "Service",
+            "position": 4,
+            "name": "Conseil Stratégique Énergie",
+            "description": "Assistance dans la sélection des fournisseurs d'énergie et renégociation de contrats pour obtenir les meilleurs tarifs du marché.",
+            "provider": { "@id": "https://stellarisconseil.fr/#organization" },
+            "areaServed": { "@type": "Country", "name": "France" }
+          },
+          {
+            "@type": "Service",
+            "position": 5,
+            "name": "Optimisation Sans Travaux",
+            "description": "Solutions d'optimisation énergétique sans investissement initial ni travaux. Gains immédiats sur votre facture grâce à des ajustements opérationnels.",
+            "provider": { "@id": "https://stellarisconseil.fr/#organization" },
+            "areaServed": { "@type": "Country", "name": "France" }
+          },
+          {
+            "@type": "Service",
+            "position": 6,
+            "name": "Formation Énergie",
+            "description": "Formations pratiques pour sensibiliser vos équipes à la réduction de la consommation d'électricité et adopter les bons gestes au quotidien.",
+            "provider": { "@id": "https://stellarisconseil.fr/#organization" },
+            "areaServed": { "@type": "Country", "name": "France" }
+          }
+        ]
+      }
+    </script>
+    <!-- SEO: Schema.org JSON-LD — BreadcrumbList -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Accueil",
+            "item": "https://stellarisconseil.fr/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://stellarisconseil.fr/#services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "À propos",
+            "item": "https://stellarisconseil.fr/#about"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Prendre rendez-vous",
+            "item": "https://stellarisconseil.fr/#booking"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Contact",
+            "item": "https://stellarisconseil.fr/#contact"
+          }
+        ]
+      }
+    </script>
+    <!-- SEO: Schema.org JSON-LD — FAQPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Combien peut-on économiser avec un audit énergétique ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "En moyenne, nos clients réalisent entre 15% et 30% d'économies sur leur facture énergétique grâce à nos recommandations personnalisées. Les résultats varient selon le secteur d'activité et la taille de l'entreprise."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "La consultation initiale est-elle gratuite ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, Stellaris Conseil propose un diagnostic flash gratuit de 30 minutes avec un expert énergie. Ce premier échange permet d'évaluer votre situation et d'identifier les premières pistes d'optimisation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Faut-il réaliser des travaux pour réduire sa consommation ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non, pas nécessairement. Stellaris Conseil propose des solutions d'optimisation sans travaux et sans investissement initial. Nous identifions des leviers d'économies immédiats : renégociation de contrats, ajustement des puissances souscrites, optimisation tarifaire."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels types d'entreprises accompagnez-vous ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nous accompagnons tous les types d'entreprises en France : industrie, commerce et retail, hôtellerie-restauration, santé, éducation, tertiaire et collectivités. Nos solutions s'adaptent à chaque secteur d'activité."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Dans quelles régions intervenez-vous ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stellaris Conseil intervient sur l'ensemble du territoire français. Nous accompagnons des entreprises partout en France, avec une présence forte en Île-de-France, Auvergne-Rhône-Alpes et Provence-Alpes-Côte d'Azur."
+            }
+          }
+        ]
+      }
+    </script>
     <!-- Animated background with orbs -->
     <div class="animated-bg">
       <div class="orb orb1"></div>
@@ -26,19 +299,24 @@
     <!-- Cursor glow for ambient light effect -->
     <div class="cursor-glow" aria-hidden="true"></div>
     <!-- Navigation -->
-    <nav class="navbar">
+    <!-- SEO: navigation principale avec aria-label pour l'accessibilité -->
+    <nav class="navbar" aria-label="Navigation principale">
       <div class="container">
         <div class="navbar-brand">
+          <!-- SEO: alt descriptif pour le logo -->
           <img
             src="assets/logoNoBg.svg"
-            alt="Stellaris Conseil Logo"
+            alt="Stellaris Conseil — Cabinet de conseil en optimisation énergétique"
             class="logo"
+            width="60"
+            height="60"
           />
           <span>Stellaris Conseil</span>
         </div>
         <ul class="nav-links">
           <li><a href="#services">Services</a></li>
           <li><a href="#about">À propos</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#booking" class="btn-cta">Prendre RDV</a></li>
           <li>
@@ -64,426 +342,751 @@
       <div class="scroll-progress-bar"></div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Optimisez votre facture énergétique</h1>
-        <p>
-          Stellaris Conseil accompagne les entreprises dans la maîtrise et la
-          réduction de leurs coûts énergétiques
-        </p>
-        <div class="glass-cta" aria-hidden="false">
-          <span class="badge">Offert</span>
-          <div class="cta-text">
-            <strong>Diagnostique flash 30 min</strong>
-            <small>Avec un expert énergie</small>
+    <!-- SEO: balise main pour l'accessibilité et la sémantique -->
+    <main>
+      <!-- Hero Section -->
+      <!-- SEO: section principale avec contenu enrichi pour les mots-clés cibles -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Optimisez votre facture énergétique</h1>
+          <p>
+            Stellaris Conseil accompagne les entreprises de toutes tailles en
+            France dans la maîtrise et la réduction de leurs coûts énergétiques.
+            Audit, conseil stratégique et solutions sans travaux pour des
+            économies immédiates.
+          </p>
+          <div class="glass-cta" aria-hidden="false">
+            <span class="badge">Offert</span>
+            <div class="cta-text">
+              <strong>Diagnostique flash 30 min</strong>
+              <small>Avec un expert énergie</small>
+            </div>
+            <a href="#booking" class="btn btn-primary btn-compact">Réserver</a>
           </div>
-          <a href="#booking" class="btn btn-primary btn-compact">Réserver</a>
+          <!-- <a href="#booking" class="btn btn-primary">Demander une consultation</a> -->
         </div>
-        <!-- <a href="#booking" class="btn btn-primary">Demander une consultation</a> -->
-      </div>
-      <div class="hero-visual">
-        <div class="floating-icon">
-          <img
-            src="assets/logoNoBg.svg"
-            alt="Stellaris Conseil Logo"
-            class="logo-large"
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-      <div class="container">
-        <h2>Nos Services</h2>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>Diagnostic Énergétique</h3>
-            <p>
-              Analyse complète de votre consommation énergétique et
-              identification des économies potentielles
-            </p>
-          </div>
-
-          <div class="service-card glass-panel">
-            <div class="service-icon">
-              <i class="fas fa-lightbulb"></i>
-            </div>
-            <h3>Optimisation des Coûts</h3>
-            <p>
-              Stratégies personnalisées pour réduire votre facture énergétique
-              jusqu'à 30%
-            </p>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-leaf"></i>
-            </div>
-            <h3>Transition Énergétique</h3>
-            <p>
-              Accompagnement vers des solutions éco-responsables et durables
-            </p>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-handshake"></i>
-            </div>
-            <h3>Conseil Stratégique</h3>
-            <p>
-              Assistance dans la sélection des fournisseurs et renégociation de
-              contrats
-            </p>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fa-solid fa-person-digging"></i>
-            </div>
-            <h3>Sans Travaux</h3>
-            <p>
-              Solutions d'optimisation sans investissement initial ni travaux
-            </p>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-graduation-cap"></i>
-            </div>
-            <h3>Formation Énergie</h3>
-            <p>
-              Formations pratiques pour réduire votre consommation d'électricité
-              et adopter les bons gestes au quotidien
-            </p>
+        <div class="hero-visual">
+          <div class="floating-icon">
+            <!-- SEO: alt optimisé et lazy loading -->
+            <img
+              src="assets/logoNoBg.svg"
+              alt="Logo Stellaris Conseil — Expert en réduction des coûts énergétiques pour entreprises"
+              class="logo-large"
+              loading="lazy"
+              width="260"
+              height="260"
+            />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <div class="about-content">
-          <div class="about-text">
-            <h2>Pourquoi Stellaris Conseil ?</h2>
-            <ul class="benefits">
-              <li>
-                <strong>Résultats mesurables</strong> et garantis pour vos
-                économies
-              </li>
-              <li>
-                <strong>Approche personnalisée</strong> adaptée à votre secteur
-                d'activité
-              </li>
-              <li>
-                <strong>Transparence totale</strong> dans nos recommandations
-              </li>
-              <li>
-                <strong>Accompagnement long terme</strong> pour votre
-                transformation
-              </li>
-            </ul>
-          </div>
-          <!-- <div class="about-stats">
-            <div class="stat">
-              <h3 data-target="0">0</h3>
-              <p>Entreprises accompagnées</p>
-            </div>
-            <div class="stat">
-              <h3 data-target="25">0</h3>
-              <p>d'économies réalisées</p>
-            </div>
-            <div class="stat">
-              <h3 data-target="98">0</h3>
-              <p>de satisfaction client</p>
-            </div>
-          </div> -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Booking Section -->
-    <section id="booking" class="booking">
-      <div class="container">
-        <h2>Prendre Rendez-vous</h2>
-        <p class="booking-subtitle">
-          Obtenez une consultation gratuite avec nos experts énergétiques
-        </p>
-
-        <form class="booking-form glass-panel" id="bookingForm">
-          <!-- Progress indicator -->
-          <div class="form-progress">
-            <span class="form-progress-dot active" data-step="1"></span>
-            <span class="form-progress-dot" data-step="2"></span>
-            <span class="form-progress-dot" data-step="3"></span>
-            <span class="form-progress-dot" data-step="4"></span>
-          </div>
-
-          <!-- Step 1: Contact Info -->
-          <div class="form-step active" data-step="1">
-            <p class="step-title">Vos coordonnées</p>
-            <div class="form-group">
-              <label for="name">Nom complet *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                placeholder="Jean Dupont"
-              />
-              <span class="field-error" data-for="name"
-                >Veuillez entrer votre nom</span
-              >
-            </div>
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                placeholder="jean@entreprise.fr"
-              />
-              <span class="field-error" data-for="email"
-                >Veuillez entrer un email valide</span
-              >
-            </div>
-            <div class="form-group">
-              <label for="phone">Téléphone *</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                placeholder="06 12 34 56 78"
-              />
-              <span class="field-error" data-for="phone"
-                >Veuillez entrer un numéro de téléphone valide</span
-              >
-            </div>
-            <div class="form-nav-buttons">
-              <button
-                type="button"
-                class="btn btn-primary btn-next"
-                data-next="2"
-              >
-                Suivant <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 2: Company Info -->
-          <div class="form-step" data-step="2">
-            <p class="step-title">Votre entreprise</p>
-            <div class="form-group">
-              <label for="company">Nom entreprise *</label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                required
-                placeholder="Mon Entreprise SAS"
-              />
-              <span class="field-error" data-for="company"
-                >Veuillez entrer le nom de votre entreprise</span
-              >
-            </div>
-            <div class="form-group">
-              <label for="sector">Secteur d'activité *</label>
-              <select id="sector" name="sector" required>
-                <option value="">-- Sélectionner votre secteur --</option>
-                <option value="industrie">Industrie</option>
-                <option value="retail">Retail / Commerce</option>
-                <option value="healthcare">Santé</option>
-                <option value="education">Éducation</option>
-                <option value="hospitality">Hôtellerie / Restauration</option>
-                <option value="other">Autre</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="description">Description de vos besoins</label>
-              <textarea
-                id="description"
-                name="description"
-                rows="3"
-                placeholder="Décrivez brièvement votre situation énergétique..."
-              ></textarea>
-            </div>
-            <div class="form-nav-buttons">
-              <button
-                type="button"
-                class="btn btn-secondary btn-prev"
-                data-prev="1"
-              >
-                <i class="fas fa-arrow-left"></i> Retour
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-next"
-                data-next="3"
-              >
-                Suivant <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 3: Slot Selection -->
-          <div class="form-step" data-step="3">
-            <p class="step-title">Choisir un créneau</p>
-
-            <!-- Visual date picker -->
-            <div class="form-group" id="slotPicker">
-              <div id="datePicker" class="date-picker">
-                <div class="date-picker-header">
-                  <button
-                    type="button"
-                    id="datePrevWeek"
-                    class="date-nav-btn"
-                    aria-label="Semaine precedente"
-                    title="Semaine precedente"
-                  >
-                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
-                  </button>
-                  <span id="datePickerLabel" class="date-picker-label"
-                    >Chargement...</span
-                  >
-                  <button
-                    type="button"
-                    id="dateNextWeek"
-                    class="date-nav-btn"
-                    aria-label="Semaine suivante"
-                    title="Semaine suivante"
-                  >
-                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                  </button>
-                </div>
-                <div id="datePickerDays" class="date-picker-days"></div>
+      <!-- Services Section -->
+      <!-- SEO: section services avec contenu enrichi et mots-clés naturels -->
+      <section id="services" class="services">
+        <div class="container">
+          <h2>Nos Services d'Optimisation Énergétique</h2>
+          <!-- SEO: paragraphe introductif pour enrichir le contenu sémantique -->
+          <p
+            style="
+              text-align: center;
+              max-width: 700px;
+              margin: 0 auto 2.5rem;
+              color: var(--text-secondary);
+              font-size: 1.05rem;
+              line-height: 1.7;
+            "
+          >
+            Stellaris Conseil propose une gamme complète de services pour aider
+            les entreprises françaises à maîtriser leur consommation d'énergie
+            et réduire durablement leurs dépenses. De l'audit initial à la
+            formation de vos équipes, nous vous accompagnons à chaque étape.
+          </p>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
               </div>
+              <h3>Diagnostic Énergétique</h3>
+              <p>
+                Analyse complète de votre consommation énergétique :
+                électricité, gaz, fioul. Nous identifions les postes de dépenses
+                excessifs et les économies potentielles grâce à un bilan
+                détaillé avec recommandations personnalisées pour votre
+                entreprise.
+              </p>
+            </div>
 
-              <!-- Time slot buttons -->
-              <div id="timeSlots" class="time-slots">
-                <p class="time-slots-placeholder">
-                  Sélectionnez une date pour voir les horaires
-                </p>
+            <div class="service-card glass-panel">
+              <div class="service-icon">
+                <i class="fas fa-lightbulb" aria-hidden="true"></i>
               </div>
+              <h3>Optimisation des Coûts</h3>
+              <p>
+                Stratégies personnalisées pour réduire votre facture énergétique
+                jusqu'à 30%. Analyse tarifaire approfondie, optimisation des
+                contrats fournisseurs et suivi continu des performances pour
+                garantir des résultats mesurables.
+              </p>
+            </div>
 
-              <small
-                id="slotHelp"
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-leaf" aria-hidden="true"></i>
+              </div>
+              <h3>Transition Énergétique</h3>
+              <p>
+                Accompagnement vers des solutions éco-responsables et durables
+                pour votre entreprise. Étude de faisabilité, choix des
+                technologies vertes, pilotage de projet et suivi de la mise en
+                œuvre pour une transition réussie.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-handshake" aria-hidden="true"></i>
+              </div>
+              <h3>Conseil Stratégique</h3>
+              <p>
+                Assistance experte dans la sélection des fournisseurs d'énergie
+                et la renégociation de vos contrats. Nous comparons les offres
+                du marché pour vous obtenir les meilleurs tarifs et conditions
+                adaptés à votre profil de consommation.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-person-digging" aria-hidden="true"></i>
+              </div>
+              <h3>Optimisation Sans Travaux</h3>
+              <p>
+                Solutions d'optimisation énergétique sans investissement initial
+                ni travaux. Gains immédiats sur votre facture grâce à des
+                ajustements opérationnels : puissance souscrite, heures creuses,
+                régulation thermique et bonnes pratiques.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+              </div>
+              <h3>Formation Énergie</h3>
+              <p>
+                Formations pratiques destinées à vos collaborateurs pour réduire
+                la consommation d'électricité au quotidien. Sensibilisation aux
+                éco-gestes, bonnes pratiques énergétiques et accompagnement au
+                changement des comportements en entreprise.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <!-- SEO: section à propos enrichie avec contenu sémantique -->
+      <section id="about" class="about">
+        <div class="container">
+          <div class="about-content">
+            <div class="about-text">
+              <h2>Pourquoi choisir Stellaris Conseil ?</h2>
+              <!-- SEO: paragraphe introductif enrichi -->
+              <p
                 style="
-                  opacity: 0.7;
-                  display: block;
-                  margin-top: 0.5rem;
-                  text-align: center;
+                  color: var(--text-secondary);
+                  font-size: 1.05rem;
+                  line-height: 1.7;
+                  margin-bottom: 1.5rem;
                 "
               >
-                Les créneaux sont mis à jour en temps réel
-              </small>
-              <!-- Hidden select to store selected value (backward compat) -->
-              <select
-                id="slotSelect"
-                name="slot"
-                style="display: none"
-              ></select>
-            </div>
-
-            <div class="form-nav-buttons">
-              <button
-                type="button"
-                class="btn btn-secondary btn-prev"
-                data-prev="2"
-              >
-                <i class="fas fa-arrow-left"></i> Retour
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-next"
-                data-next="4"
-              >
-                Suivant <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 4: Recap + Confirmation -->
-          <div class="form-step" data-step="4">
-            <p class="step-title">Récapitulatif</p>
-
-            <div id="bookingRecap" class="booking-recap">
-              <!-- Filled dynamically -->
-            </div>
-
-            <div class="form-group checkbox">
-              <input type="checkbox" id="terms" name="terms" required />
-              <label for="terms">
-                J'accepte les conditions d'utilisation et la politique de
-                confidentialité *
-              </label>
-            </div>
-
-            <div class="form-nav-buttons">
-              <button
-                type="button"
-                class="btn btn-secondary btn-prev"
-                data-prev="3"
-              >
-                <i class="fas fa-arrow-left"></i> Retour
-              </button>
-              <button type="submit" class="btn btn-primary btn-large">
-                <i class="fas fa-check"></i> Confirmer le rendez-vous
-              </button>
+                Spécialiste de l'optimisation énergétique en France, Stellaris
+                Conseil aide les entreprises de tous secteurs — industrie,
+                commerce, hôtellerie, santé — à réduire significativement leur
+                facture d'énergie. Notre approche combine expertise technique,
+                connaissance approfondie du marché de l'énergie et
+                accompagnement sur mesure.
+              </p>
+              <ul class="benefits">
+                <li>
+                  <strong>Résultats mesurables</strong> : jusqu'à 30%
+                  d'économies garanties sur votre facture énergétique, avec un
+                  suivi chiffré et transparent
+                </li>
+                <li>
+                  <strong>Approche personnalisée</strong> : chaque
+                  recommandation est adaptée à votre secteur d'activité, votre
+                  profil de consommation et vos objectifs
+                </li>
+                <li>
+                  <strong>Transparence totale</strong> : rapports détaillés,
+                  recommandations indépendantes, aucun conflit d'intérêt avec
+                  les fournisseurs d'énergie
+                </li>
+                <li>
+                  <strong>Accompagnement long terme</strong> : nous vous suivons
+                  dans la durée pour pérenniser les économies et adapter la
+                  stratégie aux évolutions du marché
+                </li>
+                <li>
+                  <strong>Intervention partout en France</strong> : nos
+                  consultants énergie interviennent sur l'ensemble du
+                  territoire, en Île-de-France, dans les grandes métropoles et
+                  en régions
+                </li>
+              </ul>
             </div>
           </div>
-
-          <p class="form-info">
-            Nous vous confirmerons votre rendez-vous par email dans les 24h
-          </p>
-        </form>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2>Nous Contacter</h2>
-        <div class="contact-info">
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <div>
-              <h4>Téléphone</h4>
-              <p>+33 (0)1 23 45 67 89</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <div>
-              <h4>Email</h4>
-              <p>contact@stellarisconseil.fr</p>
-            </div>
-          </div>
-          <!-- <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div>
-              <h4>Adresse</h4>
-              <p>75 Rue de la Paix, 75000 Paris</p>
-            </div>
-          </div> -->
         </div>
-      </div>
-    </section>
+      </section>
 
+      <!-- SEO: Section FAQ pour le référencement longue traîne -->
+      <section
+        id="faq"
+        class="about"
+        style="
+          background-color: var(--bg-alt);
+          transition: background-color 0.3s ease;
+        "
+      >
+        <div class="container">
+          <h2>Questions Fréquentes</h2>
+          <div style="max-width: 800px; margin: 0 auto">
+            <details
+              style="
+                margin-bottom: 1rem;
+                padding: 1.25rem;
+                background: var(--glass-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+              "
+            >
+              <summary
+                style="
+                  cursor: pointer;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                  font-size: 1.05rem;
+                "
+              >
+                Combien peut-on économiser avec un audit énergétique ?
+              </summary>
+              <p
+                style="
+                  margin-top: 0.75rem;
+                  color: var(--text-secondary);
+                  line-height: 1.7;
+                "
+              >
+                En moyenne, nos clients réalisent entre 15% et 30% d'économies
+                sur leur facture énergétique grâce à nos recommandations
+                personnalisées. Les résultats varient selon le secteur
+                d'activité, la taille de l'entreprise et les leviers identifiés
+                : renégociation de contrats, ajustement de puissance,
+                optimisation tarifaire ou amélioration des usages.
+              </p>
+            </details>
+            <details
+              style="
+                margin-bottom: 1rem;
+                padding: 1.25rem;
+                background: var(--glass-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+              "
+            >
+              <summary
+                style="
+                  cursor: pointer;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                  font-size: 1.05rem;
+                "
+              >
+                La consultation initiale est-elle vraiment gratuite ?
+              </summary>
+              <p
+                style="
+                  margin-top: 0.75rem;
+                  color: var(--text-secondary);
+                  line-height: 1.7;
+                "
+              >
+                Oui, Stellaris Conseil propose un diagnostic flash gratuit de 30
+                minutes avec un expert énergie. Ce premier échange permet
+                d'évaluer votre situation énergétique, d'identifier les
+                premières pistes d'optimisation et de définir ensemble un plan
+                d'action adapté à vos besoins. Aucun engagement requis.
+              </p>
+            </details>
+            <details
+              style="
+                margin-bottom: 1rem;
+                padding: 1.25rem;
+                background: var(--glass-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+              "
+            >
+              <summary
+                style="
+                  cursor: pointer;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                  font-size: 1.05rem;
+                "
+              >
+                Faut-il réaliser des travaux pour réduire sa consommation ?
+              </summary>
+              <p
+                style="
+                  margin-top: 0.75rem;
+                  color: var(--text-secondary);
+                  line-height: 1.7;
+                "
+              >
+                Non, pas nécessairement. Stellaris Conseil propose des solutions
+                d'optimisation sans travaux et sans investissement initial. Nous
+                identifions des leviers d'économies immédiats : renégociation de
+                contrats, ajustement des puissances souscrites, optimisation
+                tarifaire (heures creuses/pleines), et bonnes pratiques de
+                consommation.
+              </p>
+            </details>
+            <details
+              style="
+                margin-bottom: 1rem;
+                padding: 1.25rem;
+                background: var(--glass-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+              "
+            >
+              <summary
+                style="
+                  cursor: pointer;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                  font-size: 1.05rem;
+                "
+              >
+                Quels types d'entreprises accompagnez-vous ?
+              </summary>
+              <p
+                style="
+                  margin-top: 0.75rem;
+                  color: var(--text-secondary);
+                  line-height: 1.7;
+                "
+              >
+                Nous accompagnons tous les types d'entreprises en France :
+                industrie et production, commerce et retail,
+                hôtellerie-restauration, établissements de santé, éducation,
+                bureaux tertiaires et collectivités. Nos solutions s'adaptent à
+                chaque profil de consommation et à chaque secteur d'activité,
+                quelle que soit la taille de votre structure.
+              </p>
+            </details>
+            <details
+              style="
+                margin-bottom: 1rem;
+                padding: 1.25rem;
+                background: var(--glass-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+              "
+            >
+              <summary
+                style="
+                  cursor: pointer;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                  font-size: 1.05rem;
+                "
+              >
+                Dans quelles régions de France intervenez-vous ?
+              </summary>
+              <p
+                style="
+                  margin-top: 0.75rem;
+                  color: var(--text-secondary);
+                  line-height: 1.7;
+                "
+              >
+                Stellaris Conseil intervient sur l'ensemble du territoire
+                français. Nous accompagnons des entreprises dans toutes les
+                régions : Île-de-France, Auvergne-Rhône-Alpes,
+                Provence-Alpes-Côte d'Azur, Nouvelle-Aquitaine, Occitanie,
+                Hauts-de-France, Grand Est, Bretagne et bien d'autres. Nos
+                experts se déplacent ou interviennent à distance selon vos
+                besoins.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Booking Section -->
+      <section id="booking" class="booking">
+        <div class="container">
+          <h2>Prendre Rendez-vous</h2>
+          <p class="booking-subtitle">
+            Obtenez une consultation gratuite avec nos experts énergétiques
+          </p>
+
+          <form class="booking-form glass-panel" id="bookingForm">
+            <!-- Progress indicator -->
+            <div class="form-progress">
+              <span class="form-progress-dot active" data-step="1"></span>
+              <span class="form-progress-dot" data-step="2"></span>
+              <span class="form-progress-dot" data-step="3"></span>
+              <span class="form-progress-dot" data-step="4"></span>
+            </div>
+
+            <!-- Step 1: Contact Info -->
+            <div class="form-step active" data-step="1">
+              <p class="step-title">Vos coordonnées</p>
+              <div class="form-group">
+                <label for="name">Nom complet *</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Jean Dupont"
+                />
+                <span class="field-error" data-for="name"
+                  >Veuillez entrer votre nom</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="jean@entreprise.fr"
+                />
+                <span class="field-error" data-for="email"
+                  >Veuillez entrer un email valide</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="phone">Téléphone *</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="06 12 34 56 78"
+                />
+                <span class="field-error" data-for="phone"
+                  >Veuillez entrer un numéro de téléphone valide</span
+                >
+              </div>
+              <div class="form-nav-buttons">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-next"
+                  data-next="2"
+                >
+                  Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Company Info -->
+            <div class="form-step" data-step="2">
+              <p class="step-title">Votre entreprise</p>
+              <div class="form-group">
+                <label for="company">Nom entreprise *</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  required
+                  placeholder="Mon Entreprise SAS"
+                />
+                <span class="field-error" data-for="company"
+                  >Veuillez entrer le nom de votre entreprise</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="sector">Secteur d'activité *</label>
+                <select id="sector" name="sector" required>
+                  <option value="">-- Sélectionner votre secteur --</option>
+                  <option value="industrie">Industrie</option>
+                  <option value="retail">Retail / Commerce</option>
+                  <option value="healthcare">Santé</option>
+                  <option value="education">Éducation</option>
+                  <option value="hospitality">Hôtellerie / Restauration</option>
+                  <option value="other">Autre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="description">Description de vos besoins</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="3"
+                  placeholder="Décrivez brièvement votre situation énergétique..."
+                ></textarea>
+              </div>
+              <div class="form-nav-buttons">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-prev"
+                  data-prev="1"
+                >
+                  <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-next"
+                  data-next="3"
+                >
+                  Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Slot Selection -->
+            <div class="form-step" data-step="3">
+              <p class="step-title">Choisir un créneau</p>
+
+              <!-- Visual date picker -->
+              <div class="form-group" id="slotPicker">
+                <div id="datePicker" class="date-picker">
+                  <div class="date-picker-header">
+                    <button
+                      type="button"
+                      id="datePrevWeek"
+                      class="date-nav-btn"
+                      aria-label="Semaine precedente"
+                      title="Semaine precedente"
+                    >
+                      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <span id="datePickerLabel" class="date-picker-label"
+                      >Chargement...</span
+                    >
+                    <button
+                      type="button"
+                      id="dateNextWeek"
+                      class="date-nav-btn"
+                      aria-label="Semaine suivante"
+                      title="Semaine suivante"
+                    >
+                      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div id="datePickerDays" class="date-picker-days"></div>
+                </div>
+
+                <!-- Time slot buttons -->
+                <div id="timeSlots" class="time-slots">
+                  <p class="time-slots-placeholder">
+                    Sélectionnez une date pour voir les horaires
+                  </p>
+                </div>
+
+                <small
+                  id="slotHelp"
+                  style="
+                    opacity: 0.7;
+                    display: block;
+                    margin-top: 0.5rem;
+                    text-align: center;
+                  "
+                >
+                  Les créneaux sont mis à jour en temps réel
+                </small>
+                <!-- Hidden select to store selected value (backward compat) -->
+                <select
+                  id="slotSelect"
+                  name="slot"
+                  style="display: none"
+                ></select>
+              </div>
+
+              <div class="form-nav-buttons">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-prev"
+                  data-prev="2"
+                >
+                  <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-next"
+                  data-next="4"
+                >
+                  Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 4: Recap + Confirmation -->
+            <div class="form-step" data-step="4">
+              <p class="step-title">Récapitulatif</p>
+
+              <div id="bookingRecap" class="booking-recap">
+                <!-- Filled dynamically -->
+              </div>
+
+              <div class="form-group checkbox">
+                <input type="checkbox" id="terms" name="terms" required />
+                <label for="terms">
+                  J'accepte les conditions d'utilisation et la politique de
+                  confidentialité *
+                </label>
+              </div>
+
+              <div class="form-nav-buttons">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-prev"
+                  data-prev="3"
+                >
+                  <i class="fas fa-arrow-left"></i> Retour
+                </button>
+                <button type="submit" class="btn btn-primary btn-large">
+                  <i class="fas fa-check"></i> Confirmer le rendez-vous
+                </button>
+              </div>
+            </div>
+
+            <p class="form-info">
+              Nous vous confirmerons votre rendez-vous par email dans les 24h
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <!-- SEO: section contact avec données NAP complètes -->
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2>Nous Contacter</h2>
+          <!-- SEO: texte introductif pour enrichir le contenu -->
+          <p
+            style="
+              text-align: center;
+              max-width: 600px;
+              margin: 0 auto 2rem;
+              color: var(--text-secondary);
+              font-size: 1.05rem;
+              line-height: 1.7;
+            "
+          >
+            Vous souhaitez réduire votre facture énergétique ? Contactez nos
+            experts pour un
+            <a
+              href="#booking"
+              style="color: var(--primary); text-decoration: underline"
+              >diagnostic gratuit</a
+            >
+            ou posez-nous vos questions directement.
+          </p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+              <div>
+                <h4>Téléphone</h4>
+                <!-- SEO: lien cliquable pour le téléphone -->
+                <p>
+                  <a
+                    href="tel:+33610304 34"
+                    style="color: inherit; text-decoration: none"
+                    >+33 (0)6 10 30 41 34</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <div>
+                <h4>Email</h4>
+                <!-- SEO: lien mailto cliquable -->
+                <p>
+                  <a
+                    href="mailto:l.stellarisconseil@gmail.com"
+                    style="color: inherit; text-decoration: none"
+                    >l.stellarisconseil@gmail.com</a
+                  >
+                </p>
+              </div>
+            </div>
+            <!-- SEO: zone géographique desservie -->
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+              <div>
+                <h4>Zone d'intervention</h4>
+                <p>
+                  France entière — Île-de-France, Lyon, Marseille, Bordeaux et
+                  toutes régions
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
     <!-- Footer -->
-    <footer class="footer">
+    <!-- SEO: footer enrichi avec données NAP, maillage interne et liens fonctionnels -->
+    <footer class="footer" role="contentinfo">
       <div class="container">
-        <p>&copy; 2025 Stellaris Conseil. Tous droits réservés.</p>
-        <div class="footer-links">
-          <a href="#">Mentions légales</a>
-          <a href="#">Politique de confidentialité</a>
-          <a href="#">Conditions d'utilisation</a>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+          "
+        >
+          <!-- SEO: Données NAP dans le footer pour cohérence SEO local -->
+          <div style="text-align: center; margin-bottom: 0.5rem">
+            <strong style="color: var(--primary); font-size: 1rem"
+              >Stellaris Conseil</strong
+            >
+            <p style="font-size: 0.85rem; margin: 0.25rem 0">
+              Cabinet de conseil en optimisation énergétique pour entreprises
+            </p>
+            <p style="font-size: 0.85rem; margin: 0.15rem 0">
+              <a
+                href="tel:+33610304 34"
+                style="color: rgba(255, 255, 255, 0.7); text-decoration: none"
+                >+33 (0)6 10 30 41 34</a
+              >
+              &nbsp;·&nbsp;
+              <a
+                href="mailto:l.stellarisconseil@gmail.com"
+                style="color: rgba(255, 255, 255, 0.7); text-decoration: none"
+                >l.stellarisconseil@gmail.com</a
+              >
+            </p>
+            <p style="font-size: 0.8rem; margin: 0.15rem 0; opacity: 0.7">
+              Intervention sur toute la France : Paris, Lyon, Marseille,
+              Bordeaux, Toulouse, Nantes, Lille, Strasbourg
+            </p>
+          </div>
+          <!-- SEO: maillage interne dans le footer -->
+          <div
+            class="footer-links"
+            style="flex-wrap: wrap; justify-content: center"
+          >
+            <a href="#services">Nos services</a>
+            <a href="#about">À propos</a>
+            <a href="#faq">FAQ</a>
+            <a href="#booking">Prendre rendez-vous</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <p style="font-size: 0.8rem; opacity: 0.6">
+            &copy; 2025 Stellaris Conseil. Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>
@@ -531,6 +1134,7 @@
       </ul>
     </nav>
 
-    <script src="js/main.js"></script>
+    <!-- SEO: script chargé en defer pour ne pas bloquer le rendu -->
+    <script src="js/main.js" defer></script>
   </body>
 </html>
