@@ -61,17 +61,17 @@ cp .env.example .env
 
 Variables d'environnement (`.env`) :
 
-| Variable             | Description                    | Défaut         |
-| -------------------- | ------------------------------ | -------------- |
-| `PORT`               | Port du serveur                | `3000`         |
-| `ADMIN_API_KEY`      | Clé API pour l'interface admin | `changeme`     |
-| `DEBUG`              | Activer les logs de debug      | `false`        |
-| `SMTP_HOST`          | Serveur SMTP                   | -              |
-| `SMTP_PORT`          | Port SMTP                      | `587`          |
-| `SMTP_USER`          | Utilisateur SMTP               | -              |
-| `SMTP_PASS`          | Mot de passe SMTP              | -              |
-| `SMTP_FROM`          | Adresse expéditeur             | `no-reply@...` |
-| `ADMIN_NOTIFY_EMAIL` | Email de notification admin (fallback) | -       |
+| Variable             | Description                            | Défaut         |
+| -------------------- | -------------------------------------- | -------------- |
+| `PORT`               | Port du serveur                        | `3000`         |
+| `ADMIN_API_KEY`      | Clé API pour l'interface admin         | `changeme`     |
+| `DEBUG`              | Activer les logs de debug              | `false`        |
+| `SMTP_HOST`          | Serveur SMTP                           | -              |
+| `SMTP_PORT`          | Port SMTP                              | `587`          |
+| `SMTP_USER`          | Utilisateur SMTP                       | -              |
+| `SMTP_PASS`          | Mot de passe SMTP                      | -              |
+| `SMTP_FROM`          | Adresse expéditeur                     | `no-reply@...` |
+| `ADMIN_NOTIFY_EMAIL` | Email de notification admin (fallback) | -              |
 
 ## 🏃 Démarrage
 
@@ -99,18 +99,18 @@ Puis ouvrir http://localhost:3000
 
 ### Admin (nécessite `x-admin-key` header)
 
-| Méthode | Route                             | Description               |
-| ------- | --------------------------------- | ------------------------- |
-| GET     | `/api/admin/schedule`             | Obtenir le planning       |
-| PUT     | `/api/admin/schedule`             | Modifier le planning      |
-| GET     | `/api/admin/slots`                | Liste créneaux (admin)    |
-| POST    | `/api/admin/slots/block`          | Bloquer un créneau        |
-| POST    | `/api/admin/slots/unblock`        | Débloquer un créneau      |
-| GET     | `/api/admin/slots/blocked`        | Liste créneaux bloqués    |
-| GET     | `/api/admin/bookings`             | Liste des réservations    |
-| POST    | `/api/admin/bookings`             | Créer réservation (admin) |
-| POST    | `/api/admin/bookings/:id/confirm` | Confirmer réservation     |
-| POST    | `/api/admin/bookings/:id/reject`  | Refuser réservation       |
+| Méthode | Route                                | Description                    |
+| ------- | ------------------------------------ | ------------------------------ |
+| GET     | `/api/admin/schedule`                | Obtenir le planning            |
+| PUT     | `/api/admin/schedule`                | Modifier le planning           |
+| GET     | `/api/admin/slots`                   | Liste créneaux (admin)         |
+| POST    | `/api/admin/slots/block`             | Bloquer un créneau             |
+| POST    | `/api/admin/slots/unblock`           | Débloquer un créneau           |
+| GET     | `/api/admin/slots/blocked`           | Liste créneaux bloqués         |
+| GET     | `/api/admin/bookings`                | Liste des réservations         |
+| POST    | `/api/admin/bookings`                | Créer réservation (admin)      |
+| POST    | `/api/admin/bookings/:id/confirm`    | Confirmer réservation          |
+| POST    | `/api/admin/bookings/:id/reject`     | Refuser réservation            |
 | POST    | `/api/admin/bookings/:id/send-email` | Envoyer un email manuel client |
 
 ## 🎨 Frontend

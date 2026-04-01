@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
@@ -33,14 +33,18 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        transition: background 0.3s ease, color 0.3s ease;
+        transition:
+          background 0.3s ease,
+          color 0.3s ease;
       }
       .admin-content {
         flex: 1;
         padding: 2rem;
         background: var(--bg-main);
         color: var(--text-primary);
-        transition: background 0.3s ease, color 0.3s ease;
+        transition:
+          background 0.3s ease,
+          color 0.3s ease;
       }
       .admin-nav-item {
         display: block;
@@ -496,7 +500,7 @@
         text-align: center;
       }
       .filter-btn.active .filter-badge {
-        background: rgba(255,255,255,0.3);
+        background: rgba(255, 255, 255, 0.3);
       }
       .nav-badge {
         background: #ff6b6b;
@@ -602,7 +606,12 @@
             >📊 Vue d'ensemble</a
           >
           <a class="admin-nav-item" data-section="planning">📅 Planning</a>
-          <a class="admin-nav-item" data-section="bookings">📋 Réservations <span id="navPendingBadge" class="nav-badge" style="display:none">0</span></a>
+          <a class="admin-nav-item" data-section="bookings"
+            >📋 Réservations
+            <span id="navPendingBadge" class="nav-badge" style="display: none"
+              >0</span
+            ></a
+          >
           <a class="admin-nav-item" data-section="slots">⏰ Créneaux</a>
           <a class="admin-nav-item" data-section="settings">⚙️ Paramètres</a>
         </nav>
@@ -721,10 +730,25 @@
           </p>
 
           <!-- Status filter tabs -->
-          <div class="booking-filters" style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+          <div
+            class="booking-filters"
+            style="
+              display: flex;
+              gap: 0.5rem;
+              margin-bottom: 1rem;
+              flex-wrap: wrap;
+            "
+          >
             <button class="filter-btn active" data-filter="all">Toutes</button>
-            <button class="filter-btn" data-filter="pending">En attente <span id="pendingBadge" class="filter-badge" style="display:none">0</span></button>
-            <button class="filter-btn" data-filter="confirmed">Confirmées</button>
+            <button class="filter-btn" data-filter="pending">
+              En attente
+              <span id="pendingBadge" class="filter-badge" style="display: none"
+                >0</span
+              >
+            </button>
+            <button class="filter-btn" data-filter="confirmed">
+              Confirmées
+            </button>
             <button class="filter-btn" data-filter="rejected">Refusées</button>
             <button class="filter-btn" data-filter="cancelled">Annulées</button>
           </div>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -229,18 +229,42 @@
             <p class="step-title">Vos coordonnées</p>
             <div class="form-group">
               <label for="name">Nom complet *</label>
-              <input type="text" id="name" name="name" required placeholder="Jean Dupont" />
-              <span class="field-error" data-for="name">Veuillez entrer votre nom</span>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="Jean Dupont"
+              />
+              <span class="field-error" data-for="name"
+                >Veuillez entrer votre nom</span
+              >
             </div>
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required placeholder="jean@entreprise.fr" />
-              <span class="field-error" data-for="email">Veuillez entrer un email valide</span>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="jean@entreprise.fr"
+              />
+              <span class="field-error" data-for="email"
+                >Veuillez entrer un email valide</span
+              >
             </div>
             <div class="form-group">
               <label for="phone">Téléphone *</label>
-              <input type="tel" id="phone" name="phone" required placeholder="06 12 34 56 78" />
-              <span class="field-error" data-for="phone">Veuillez entrer un numéro de téléphone valide</span>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="06 12 34 56 78"
+              />
+              <span class="field-error" data-for="phone"
+                >Veuillez entrer un numéro de téléphone valide</span
+              >
             </div>
             <div class="form-nav-buttons">
               <button
@@ -258,8 +282,16 @@
             <p class="step-title">Votre entreprise</p>
             <div class="form-group">
               <label for="company">Nom entreprise *</label>
-              <input type="text" id="company" name="company" required placeholder="Mon Entreprise SAS" />
-              <span class="field-error" data-for="company">Veuillez entrer le nom de votre entreprise</span>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                required
+                placeholder="Mon Entreprise SAS"
+              />
+              <span class="field-error" data-for="company"
+                >Veuillez entrer le nom de votre entreprise</span
+              >
             </div>
             <div class="form-group">
               <label for="sector">Secteur d'activité *</label>
@@ -308,30 +340,70 @@
             <div class="form-group" id="slotPicker">
               <div id="datePicker" class="date-picker">
                 <div class="date-picker-header">
-                  <button type="button" id="datePrevWeek" class="date-nav-btn" aria-label="Semaine precedente" title="Semaine precedente"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-                  <span id="datePickerLabel" class="date-picker-label">Chargement...</span>
-                  <button type="button" id="dateNextWeek" class="date-nav-btn" aria-label="Semaine suivante" title="Semaine suivante"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                  <button
+                    type="button"
+                    id="datePrevWeek"
+                    class="date-nav-btn"
+                    aria-label="Semaine precedente"
+                    title="Semaine precedente"
+                  >
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                  </button>
+                  <span id="datePickerLabel" class="date-picker-label"
+                    >Chargement...</span
+                  >
+                  <button
+                    type="button"
+                    id="dateNextWeek"
+                    class="date-nav-btn"
+                    aria-label="Semaine suivante"
+                    title="Semaine suivante"
+                  >
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                  </button>
                 </div>
                 <div id="datePickerDays" class="date-picker-days"></div>
               </div>
 
               <!-- Time slot buttons -->
               <div id="timeSlots" class="time-slots">
-                <p class="time-slots-placeholder">Sélectionnez une date pour voir les horaires</p>
+                <p class="time-slots-placeholder">
+                  Sélectionnez une date pour voir les horaires
+                </p>
               </div>
 
-              <small id="slotHelp" style="opacity:0.7;display:block;margin-top:0.5rem;text-align:center;">
+              <small
+                id="slotHelp"
+                style="
+                  opacity: 0.7;
+                  display: block;
+                  margin-top: 0.5rem;
+                  text-align: center;
+                "
+              >
                 Les créneaux sont mis à jour en temps réel
               </small>
               <!-- Hidden select to store selected value (backward compat) -->
-              <select id="slotSelect" name="slot" style="display:none"></select>
+              <select
+                id="slotSelect"
+                name="slot"
+                style="display: none"
+              ></select>
             </div>
 
             <div class="form-nav-buttons">
-              <button type="button" class="btn btn-secondary btn-prev" data-prev="2">
+              <button
+                type="button"
+                class="btn btn-secondary btn-prev"
+                data-prev="2"
+              >
                 <i class="fas fa-arrow-left"></i> Retour
               </button>
-              <button type="button" class="btn btn-primary btn-next" data-next="4">
+              <button
+                type="button"
+                class="btn btn-primary btn-next"
+                data-next="4"
+              >
                 Suivant <i class="fas fa-arrow-right"></i>
               </button>
             </div>
@@ -354,7 +426,11 @@
             </div>
 
             <div class="form-nav-buttons">
-              <button type="button" class="btn btn-secondary btn-prev" data-prev="3">
+              <button
+                type="button"
+                class="btn btn-secondary btn-prev"
+                data-prev="3"
+              >
                 <i class="fas fa-arrow-left"></i> Retour
               </button>
               <button type="submit" class="btn btn-primary btn-large">
